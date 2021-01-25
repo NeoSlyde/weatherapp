@@ -1,4 +1,4 @@
-package app.arxivorg.controller;
+package app.appmeteo.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ArxivOrgController implements Initializable {
+public class AppMeteoController implements Initializable {
 
     @FXML private Button helloWorldButton;
     @FXML private Button goodByeWorldButton;

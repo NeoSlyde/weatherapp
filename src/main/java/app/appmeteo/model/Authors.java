@@ -1,4 +1,4 @@
-package app.arxivorg.model;
+package app.appmeteo.model;
 
 import java.util.ArrayList;
 import java.util.List;
