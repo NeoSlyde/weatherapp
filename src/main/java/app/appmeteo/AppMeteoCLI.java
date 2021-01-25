@@ -1,10 +1,10 @@
-package app.arxivorg;
+package app.appmeteo;
 
 import java.util.Scanner;
 
-public class ArxivOrgCLI {
+public class AppMeteoCLI {
     public static void main(String[] args) {
-        System.out.println("Welcome to the arXiv organizer!");
+        System.out.println("Welcome to the weather app");
 
         System.out.println("You requested command '" + args[0] + "' with parameter '" + args[1] + "'");
 
