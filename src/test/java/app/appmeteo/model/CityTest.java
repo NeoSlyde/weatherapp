@@ -1,5 +1,7 @@
 package app.appmeteo.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 public class CityTest {
@@ -10,7 +12,7 @@ public class CityTest {
         City city = new City("Marseille");
         City city2 = new City("marseille");
 
-        System.out.println(city.equals(city2));
+        assertEquals(city, city2);
     }
 
 }
