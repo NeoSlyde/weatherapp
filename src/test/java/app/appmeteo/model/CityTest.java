@@ -1,8 +1,12 @@
 package app.appmeteo.model;
 
+import org.junit.jupiter.api.Test;
+
 public class CityTest {
 
-    public static void main(String[] args) {
+
+    @Test
+    public void testEquals() {
         City city = new City("Marseille");
         City city2 = new City("marseille");
 
