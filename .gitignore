@@ -6,3 +6,5 @@ bin
 .gradle
 P;IGL.iml
 out
+.vscode
+build
