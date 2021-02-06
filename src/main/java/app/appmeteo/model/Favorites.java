@@ -7,7 +7,7 @@ public class Favorites {
 
     private List<City> favList = new ArrayList<City>();
 
-    public void Favorites(){
+    public Favorites(){
     }
 
     public List<City> getList(){
