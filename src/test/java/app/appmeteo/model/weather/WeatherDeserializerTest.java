@@ -13,6 +13,20 @@ import org.junit.jupiter.api.Test;
 
 public class WeatherDeserializerTest {
     @Test
+    public void currentWeatherTest1() throws IOException {
+        WeatherDeserializer deserializer = new WeatherDeserializer();
+        File jsonFile = new File("./src/test/resources/current_weather_test.json");
+        assertTrue(jsonFile.exists(), "Test files are absent");
+        String fileContent = Files.readString(jsonFile.toPath());
+
+        CurrentWeather weather = deserializer.getCurrentWeather(fileContent);
+
+        assertEquals("broken clouds", weather.description);
+        assertEquals("Clouds", weather.sky);
+        assertEquals(12, (int) weather.temperature.toCelcius());
+    }
+
+    @Test
     public void dailyWeatherTest1() throws IOException {
         WeatherDeserializer deserializer = new WeatherDeserializer();
         File jsonFile = new File("./src/test/resources/daily_weather_test.json");
