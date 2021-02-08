@@ -10,6 +10,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class WeatherDeserializer {
+    public CurrentWeather getCurrentWeather(String json) {
+        return null;
+    }
+
     public List<MultiTempWeather> getDailyWeather(String json) {
         List<MultiTempWeather> weatherList = new ArrayList<>();
 
