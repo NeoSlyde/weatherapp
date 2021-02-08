@@ -8,6 +8,7 @@ import java.util.List;
 import org.json.JSONObject;
 
 import app.appmeteo.model.City;
+import app.appmeteo.model.weather.CurrentWeather;
 import app.appmeteo.model.weather.MultiTempWeather;
 import app.appmeteo.model.weather.WeatherDeserializer;
 
@@ -38,6 +39,19 @@ public class OpenWeatherMapAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public static void main(String args[]) {
+        System.out.println(new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76").fetchCurrentWeather(new City("Marseille")));
+    }
+
+    public CurrentWeather fetchCurrentWeather(City city) {
+        try {
+            String json = fetchURL(new URL("http://api.openweathermap.org/data/2.5/weather?q=" + city.toString() + "&appid=" + apiKey));
+            WeatherDeserializer deserializer = new WeatherDeserializer();
+            return deserializer.getCurrentWeather(json);
+        } catch (IOException e) { e.printStackTrace(); }
         return null;
     }
 
