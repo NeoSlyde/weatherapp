@@ -1,5 +1,8 @@
 package app.appmeteo.model.weather;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -11,7 +14,22 @@ import org.json.JSONObject;
 
 public class WeatherDeserializer {
     public CurrentWeather getCurrentWeather(String json) {
-        return null;
+        JSONObject jsonRoot = new JSONObject(json);
+        JSONObject jsonWeather = jsonRoot.getJSONArray("weather").getJSONObject(0);
+        JSONObject jsonMain = jsonRoot.getJSONObject("main");
+        
+        LocalDate date = Instant.ofEpochMilli(1000l * jsonRoot.getLong("dt"))
+                         .atZone(ZoneId.systemDefault()).toLocalDate();
+
+        int id = jsonWeather.getInt("id");
+        String sky = jsonWeather.getString("main");
+        String description = jsonWeather.getString("description");
+        String icon = jsonWeather.getString("icon");
+
+        Temperature temperature = new Temperature(jsonMain.getDouble("temp"));
+
+        Weather weather = new Weather(date, id, sky, description, icon);
+        return new CurrentWeather(weather, temperature);
     }
 
     public List<MultiTempWeather> getDailyWeather(String json) {
