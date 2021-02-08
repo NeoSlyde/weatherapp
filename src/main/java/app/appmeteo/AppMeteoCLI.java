@@ -11,14 +11,12 @@ import java.util.Optional;
 
 public class AppMeteoCLI {
     public static void main(String[] args) throws IOException {
-
         OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
-        List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(args[1]));
+        List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(args[0]));
 
+        System.out.println("Voici la météo à " + args[0] + " le date: " + args[1]);
 
-        System.out.println("Voici la météo à " + args[1] + " le date: " + args[2]);
-
-        String date = args[2];
+        String date = args[1];
         int day = Integer.parseInt(date.substring(0, 2));
         int month = Integer.parseInt(date.substring(3, 5));
         int year = Integer.parseInt(date.substring(6, 10));
