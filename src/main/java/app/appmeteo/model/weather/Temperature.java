@@ -16,6 +16,6 @@ public class Temperature {
 
     @Override
     public String toString() {
-        return toCelcius() + "°C";
+        return (int)toCelcius() + "°C";
     }
 }
