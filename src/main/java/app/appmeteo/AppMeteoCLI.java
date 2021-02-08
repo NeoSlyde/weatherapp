@@ -18,21 +18,6 @@ public class AppMeteoCLI {
 
         System.out.println("Voici la météo à " + args[1] + " le date: " + args[2]);
 
-        //System.out.println("Vous avez exécuté la commande '" + args[0] + "' avec la ville '" + args[1] + "' avec la date '" + args[2]);
-
-        /*
-        System.out.println("Entrez une date DD/MM/YYYY: ");
-        Scanner scanner = new Scanner(System.in);
-        String date = scanner.nextLine();
-        int day = Integer.parseInt(date.substring(0, 2));
-        int month = Integer.parseInt(date.substring(3, 5));
-        int year = Integer.parseInt(date.substring(6, 10));
-        //System.out.println(day +" "+ month +" " +year);
-        //System.out.printf("%02d/%02d/%04d\n", day, month, year);
-        scanner.close();
-
-         */
-
         String date = args[2];
         int day = Integer.parseInt(date.substring(0, 2));
         int month = Integer.parseInt(date.substring(3, 5));
