@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter;
 public class Weather {
     public final LocalDate date;
 
-    final int id;
-    final String sky; // e.g "Clouds", "Rain" ...
-    final String description; // e.g "light rain", "few clouds" ...
-    final String icon;
+    public final int id;
+    public final String sky; // e.g "Clouds", "Rain" ...
+    public final String description; // e.g "light rain", "few clouds" ...
+    public final String icon;
 
     public Weather(LocalDate date, int id, String sky, String description, String icon) {
         this.date = date;
