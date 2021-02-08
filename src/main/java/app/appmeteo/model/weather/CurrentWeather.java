@@ -6,4 +6,9 @@ public class CurrentWeather extends Weather {
         this.temperature = temperature;
     }
     public final Temperature temperature;
+
+    @Override
+    public String toString() {
+        return super.toString() + ", " + temperature;
+    }
 }
