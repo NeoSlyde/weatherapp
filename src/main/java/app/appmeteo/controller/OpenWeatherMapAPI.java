@@ -1,5 +1,6 @@
 package app.appmeteo.controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -42,13 +43,10 @@ public class OpenWeatherMapAPI {
         return null;
     }
 
-    public CurrentWeather fetchCurrentWeather(City city) {
-        try {
-            String json = fetchURL(new URL("http://api.openweathermap.org/data/2.5/weather?q=" + city.toString() + "&appid=" + apiKey));
-            WeatherDeserializer deserializer = new WeatherDeserializer();
-            return deserializer.getCurrentWeather(json);
-        } catch (IOException e) { e.printStackTrace(); }
-        return null;
+    public CurrentWeather fetchCurrentWeather(City city) throws IOException {
+        String json = fetchURL(new URL("http://api.openweathermap.org/data/2.5/weather?q=" + city.toString() + "&appid=" + apiKey));
+        WeatherDeserializer deserializer = new WeatherDeserializer();
+        return deserializer.getCurrentWeather(json);
     }
 
     private String fetchURL(URL url) throws IOException {
