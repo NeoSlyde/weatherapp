@@ -53,7 +53,7 @@ public class AppMeteoCLI {
             System.out.printf(" - Maximum: %d °C\n", (int) weather.get().maxTemperature.toCelcius());
         }
         else{
-            System.out.println("ntm");
+            System.out.println("Météo introuvable");
         }
     }
 
