@@ -51,13 +51,14 @@ public class AppMeteoCLI {
             List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(args[0]));
             Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
 
-            weather.ifPresentOrElse((w) -> {
-                System.out.printf(" - Matin:   %.0f°C\n", w.morningTemperature.toCelcius());
-                System.out.printf(" - Jour:    %.0f°C\n", w.dayTemperature.toCelcius());
-                System.out.printf(" - Soir:    %.0f°C\n", w.eveningTemperature.toCelcius());
-                System.out.printf(" - Nuit:    %.0f°C\n", w.nightTemperature.toCelcius());
-                System.out.printf(" - Minimum: %.0f°C\n", w.minTemperature.toCelcius());
-                System.out.printf(" - Maximum: %.0f°C\n", w.maxTemperature.toCelcius());
+            weather.ifPresentOrElse(w -> {
+                System.out.println(" - Ciel:    " + w.description);
+                System.out.println(" - Matin:   " + w.morningTemperature);
+                System.out.println(" - Jour:    " + w.dayTemperature);
+                System.out.println(" - Soir:    " + w.eveningTemperature);
+                System.out.println(" - Nuit:    " + w.nightTemperature);
+                System.out.println(" - Minimum: " + w.minTemperature);
+                System.out.println(" - Maximum: " + w.maxTemperature);
             }, () -> System.out.println("Météo introuvable"));
         } else {
             // i.e if the user didn't specify the date
@@ -65,8 +66,7 @@ public class AppMeteoCLI {
             try {
                 CurrentWeather weather = oAPI.fetchCurrentWeather(new City(args[0]));
                 System.out.println(" - Temperature: " + weather.temperature.toString());
-                System.out.println(" - " + weather.sky);
-                System.out.println(" - " + weather.description);
+                System.out.println(" - Ciel: " + weather.description);
             } catch (FileNotFoundException e) {
                 System.out.println("Ville introuvable");
             }
