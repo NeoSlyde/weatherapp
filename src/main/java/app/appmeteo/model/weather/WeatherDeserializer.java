@@ -1,8 +1,5 @@
 package app.appmeteo.model.weather;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
