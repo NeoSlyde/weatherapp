@@ -17,21 +17,6 @@ public class OpenWeatherMapAPI {
     public OpenWeatherMapAPI(String apiKey) {
         this.apiKey = apiKey;
     }
-
-    // TESTING
-    public static void main(String args[]) throws IOException {
-        OpenWeatherMapAPI x = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
-        for (MultiTempWeather weather : x.fetchDailyWeather(new City("Gap"))) {
-            System.out.println(weather);
-            System.out.printf(" - Morning: %d °C\n", (int) weather.morningTemperature.toCelcius());
-            System.out.printf(" - Day:     %d °C\n", (int) weather.dayTemperature.toCelcius());
-            System.out.printf(" - Evening: %d °C\n", (int) weather.eveningTemperature.toCelcius());
-            System.out.printf(" - Night:   %d °C\n", (int) weather.nightTemperature.toCelcius());
-            System.out.printf(" - Minimum: %d °C\n", (int) weather.minTemperature.toCelcius());
-            System.out.printf(" - Maximum: %d °C\n", (int) weather.maxTemperature.toCelcius());
-        }
-    }
-
     public static class Coordinates {
         public final double lat, lon;
 
