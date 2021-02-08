@@ -42,10 +42,6 @@ public class OpenWeatherMapAPI {
         return null;
     }
 
-    public static void main(String args[]) {
-        System.out.println(new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76").fetchCurrentWeather(new City("Marseille")));
-    }
-
     public CurrentWeather fetchCurrentWeather(City city) {
         try {
             String json = fetchURL(new URL("http://api.openweathermap.org/data/2.5/weather?q=" + city.toString() + "&appid=" + apiKey));
