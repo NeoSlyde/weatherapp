@@ -3,7 +3,7 @@ package app.appmeteo.model.weather;
 public class Temperature {
     private final double temperature;
 
-    public Temperature(int kelvins) {
+    public Temperature(double kelvins) {
         this.temperature = kelvins;
     }
 
@@ -14,4 +14,8 @@ public class Temperature {
         return temperature - 273.15;
     }
 
+    @Override
+    public String toString() {
+        return toCelcius() + "°C";
+    }
 }
