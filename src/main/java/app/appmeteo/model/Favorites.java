@@ -22,6 +22,14 @@ public class Favorites {
         this.favList.remove(city);
     }
 
+    public String toString(){
+        String str = "";
+        for(City city : favList){
+            str = str + city.toString();
+        }
+        return str;
+    }
+
     public boolean equals(Object o) {
         if (o == null) return false;
         if (o.getClass() != this.getClass()) return false;
