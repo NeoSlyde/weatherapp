@@ -3,16 +3,11 @@ package app.appmeteo;
 import app.appmeteo.controller.OpenWeatherMapAPI;
 import app.appmeteo.model.City;
 import app.appmeteo.model.weather.MultiTempWeather;
-import app.appmeteo.model.weather.WeatherDeserializer;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class AppMeteoCLI {
     public static void main(String[] args) throws IOException {
