@@ -1,16 +1,25 @@
 package app.appmeteo.model.weather;
 
 public class Temperature {
-    private final int kelvins;
+    private final double temperature;
+    private boolean isKelvins;
 
     public Temperature(int kelvins) {
-        this.kelvins = kelvins;
+        this.temperature = kelvins;
+        this.isKelvins = true;
     }
 
-    public int toKelvins() {
-        return kelvins;
+    public double toKelvins() {
+        if(isKelvins){
+            return temperature;
+        }
+        return temperature - 273.15;
     }
-    public int toCelcius() {
-        return -1; // TODO
+    public double toCelcius() {
+        if(!isKelvins){
+            return temperature + 273.15;
+        }
+        return temperature;
     }
+
 }
