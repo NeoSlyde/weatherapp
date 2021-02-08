@@ -11,28 +11,49 @@ import java.util.Optional;
 
 public class AppMeteoCLI {
     public static void main(String[] args) throws IOException {
+        /*
+         * Input sanitizer
+         */
+        if (args.length != 2) {
+            System.out.println("Erreur: Nombre d'arguments invalides");
+            System.out.println("Argument 1: Ville");
+            System.out.println("Argument 2: Date (jj/MM/aaaa)");
+            System.exit(-1);
+        }
+
+        String date = args[1];
+        int day = 0, month = 0, year = 0;
+        try {
+            day = Integer.parseInt(date.substring(0, 2));
+            month = Integer.parseInt(date.substring(3, 5));
+            year = Integer.parseInt(date.substring(6, 10));
+            if (day < 1 || day > 31 || month < 1 || month > 12)
+                throw new IllegalArgumentException();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erreur: Date invalide");
+            System.out.println("Format: jj/MM/aaaa");
+            System.exit(-1);
+        }
+
+        /*
+         * Program start
+         */
+
         OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
         List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(args[0]));
 
-        System.out.println("Voici la météo à " + args[0] + " le date: " + args[1]);
+        System.out.println("Voici la météo à " + args[0] + " le " + args[1] + ":");
 
-        String date = args[1];
-        int day = Integer.parseInt(date.substring(0, 2));
-        int month = Integer.parseInt(date.substring(3, 5));
-        int year = Integer.parseInt(date.substring(6, 10));
         Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, LocalDate.of(year, month, day));
 
-        if(weather.isPresent()) {
-            System.out.printf(" - Matin:   %d °C\n", (int) weather.get().morningTemperature.toCelcius());
-            System.out.printf(" - Jour:    %d °C\n", (int) weather.get().dayTemperature.toCelcius());
-            System.out.printf(" - Soir:    %d °C\n", (int) weather.get().eveningTemperature.toCelcius());
-            System.out.printf(" - Nuit:    %d °C\n", (int) weather.get().nightTemperature.toCelcius());
-            System.out.printf(" - Minimum: %d °C\n", (int) weather.get().minTemperature.toCelcius());
-            System.out.printf(" - Maximum: %d °C\n", (int) weather.get().maxTemperature.toCelcius());
-        }
-        else{
-            System.out.println("Météo introuvable");
-        }
+        weather.ifPresentOrElse((w) -> {
+            System.out.printf(" - Matin:   %.0f°C\n", w.morningTemperature.toCelcius());
+            System.out.printf(" - Jour:    %.0f°C\n", w.dayTemperature.toCelcius());
+            System.out.printf(" - Soir:    %.0f°C\n", w.eveningTemperature.toCelcius());
+            System.out.printf(" - Nuit:    %.0f°C\n", w.nightTemperature.toCelcius());
+            System.out.printf(" - Minimum: %.0f°C\n", w.minTemperature.toCelcius());
+            System.out.printf(" - Maximum: %.0f°C\n", w.maxTemperature.toCelcius());
+        }, () -> System.out.println("Météo introuvable"));
     }
 
 }
