@@ -2,6 +2,8 @@ package app.appmeteo.view;
 
 import app.appmeteo.model.City;
 import app.appmeteo.model.Favorites;
+import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.naming.Binding;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,15 +30,33 @@ public class LeftBarComponnent {
         Label leftLabel = AppGui.createLabel("Villes Favorites ", "bg-5");
         leftLabel.setPrefWidth(200);
         // Button 1
-        Button button = new Button("Ajouter");
+        Button buttonAddCity = new Button("Ajouter");
+        Button buttonSelectedCity = new Button("Selectionner");
+        Button buttonRemoveCity = new Button("Supprimer");
 
         // TextField
         TextField textField = new TextField();
         textField.setPromptText("Ajouter une ville favorite");
         textField.setPrefWidth(100);
 
+        //ListView
+        ListView<City> listView = new ListView<>();
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        buttonSelectedCity.setOnAction(event -> {
+            City selectedCity = listView.getSelectionModel().getSelectedItem();
+            System.out.println("Tu as selectionne : " + selectedCity.toString());
+
+        });
+        buttonRemoveCity.setOnAction(event -> {
+            if(!listView.getItems().isEmpty()){
+                int selectedIndices = listView.getSelectionModel().getSelectedIndex();
+                City selectedCity = listView.getSelectionModel().getSelectedItem();
+                favorites.remove(selectedCity);
+                listView.getItems().remove(selectedIndices);
+            }
+        });
+
+        buttonAddCity.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (!textField.getText().trim().isEmpty()) {
@@ -52,15 +73,14 @@ public class LeftBarComponnent {
 
                     if (favorites.getList().isEmpty() || success) {
                         favorites.add(city);
-                        Button cityButton = new Button(textField.getText());
-                        vb.getChildren().add(cityButton);
+                        listView.getItems().add(city);
                     }
                     System.out.println(Arrays.toString(favorites.getList().toArray()));
                 }
 
             }
         });
-        vb.getChildren().addAll(leftLabel,button,textField);
+        vb.getChildren().addAll(leftLabel,buttonAddCity,textField,listView,buttonSelectedCity,buttonRemoveCity);
 
 
 
