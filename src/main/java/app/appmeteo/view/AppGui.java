@@ -1,11 +1,9 @@
-package app.appmeteo.model;
+package app.appmeteo.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 
 public class AppGui {
 
@@ -16,18 +14,7 @@ public class AppGui {
 
         //TOP
 
-        Label city = createLabel("Ville: ", "bg-2");
-        TextField textFieldCity = new TextField ();
-        textFieldCity.setPromptText("Entrez la ville.");
-        HBox hb = new HBox();
-        hb.getChildren().addAll(city, textFieldCity);
-        hb.setSpacing(10);
-
-        Label date = createLabel("Date: ", "bg-2");
-        TextField textFieldDate = new TextField();
-        textFieldDate.setPromptText("jj/MM/aaaa");
-        hb.getChildren().addAll(date, textFieldDate);
-        borderPane.setTop(hb);
+        borderPane.setTop(TopBarComponent.create());
 
         //LEFT
         Label left = createLabel("Left", "bg-3");
@@ -49,7 +36,7 @@ public class AppGui {
         return borderPane;
     }
 
-    private static Label createLabel(String text, String styleClass) {
+    public static Label createLabel(String text, String styleClass) {
         Label label = new Label(text);
         label.getStyleClass().add(styleClass);
         BorderPane.setMargin(label, new Insets(5));

@@ -1,6 +1,6 @@
 package app.appmeteo;
 
-import app.appmeteo.model.AppGui;
+import app.appmeteo.view.AppGui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
