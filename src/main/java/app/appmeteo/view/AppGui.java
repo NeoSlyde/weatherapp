@@ -22,11 +22,11 @@ public class AppGui {
         BorderPane.setAlignment(left, Pos.BOTTOM_LEFT);
         borderPane.setLeft(left);
 
-        Label center = createLabel("Center", "bg-4");
+        //CENTER
+        borderPane.setCenter(CenterComponent.create());
 
-        BorderPane.setAlignment(center, Pos.TOP_CENTER);
-        borderPane.setCenter(center);
 
+        //RIGHT
         Label right = createLabel("Right", "bg-5");
         borderPane.setRight(right);
 

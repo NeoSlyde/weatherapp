@@ -12,7 +12,7 @@ public class AppMeteo extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene(AppGui.create(), 640,480);
+        Scene scene = new Scene(AppGui.create(), 1200,800);
         String styleSheet = getClass().getResource("/style.css").toExternalForm();
         scene.getStylesheets().add(styleSheet);
         primaryStage.setScene(scene);

@@ -1,14 +1,22 @@
+@font-face {
+    font-family: "Quicksand";
+    src: url(./Quicksand-Regular.ttf) format("truetype");
+}
+
+.root {
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 12pt;
+}
 
 Label {
     -fx-padding: 10px;
 }
 
 .bg-1 {
-    -fx-background-color: #C1C1C1;
+    -fx-background-color: #FFFFFF;
 }
 
 .bg-2 {
-    -fx-background-color: #ffc3cb;
 }
 
 .bg-3 {
