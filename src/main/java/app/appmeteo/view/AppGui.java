@@ -17,18 +17,12 @@ public class AppGui {
         borderPane.setTop(TopBarComponent.create());
 
         //LEFT
-        Label left = createLabel("Left", "bg-3");
-
-        BorderPane.setAlignment(left, Pos.BOTTOM_LEFT);
-        borderPane.setLeft(left);
+        borderPane.setLeft(LeftBarComponnent.create());
 
         //CENTER
         borderPane.setCenter(CenterComponent.create());
-
-
         //RIGHT
-        Label right = createLabel("Right", "bg-5");
-        borderPane.setRight(right);
+        borderPane.setRight(RightBarComponnent.create());
 
         Label bottom = createLabel("Bottom", "bg-6");
         borderPane.setBottom(bottom);
