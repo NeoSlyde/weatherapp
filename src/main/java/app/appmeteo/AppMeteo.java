@@ -1,5 +1,6 @@
 package app.appmeteo;
 
+import app.appmeteo.model.AppGui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,9 +12,10 @@ public class AppMeteo extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/app/appmeteo/view/appmeteo.fxml"));
-        primaryStage.setTitle("AppMeteo");
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(AppGui.create(), 640,480);
+        String styleSheet = getClass().getResource("/style.css").toExternalForm();
+        scene.getStylesheets().add(styleSheet);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
