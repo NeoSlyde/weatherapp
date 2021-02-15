@@ -39,9 +39,6 @@ public class TopBarComponent {
 
         Button btn = new Button("Valider");
         btn.setOnAction(event -> {
-            CenterComponent.cityS = textFieldCity.getText();
-            CenterComponent.dateS = textFieldDate.getText();
-            System.out.println(CenterComponent.cityS + " " + CenterComponent.dateS);
         });
 
         hb.getChildren().addAll(city, textFieldCity, date, textFieldDate,btn);

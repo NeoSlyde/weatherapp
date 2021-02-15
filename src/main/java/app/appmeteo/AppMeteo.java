@@ -15,6 +15,7 @@ public class AppMeteo extends Application {
         Scene scene = new Scene(AppGui.create(), 1200,800);
         String styleSheet = getClass().getResource("/style.css").toExternalForm();
         scene.getStylesheets().add(styleSheet);
+        primaryStage.setTitle("Project Z: AppMeteo");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
