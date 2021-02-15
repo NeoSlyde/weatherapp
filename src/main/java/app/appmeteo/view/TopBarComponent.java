@@ -39,6 +39,7 @@ public class TopBarComponent {
 
         Button btn = new Button("Valider");
         btn.setOnAction(event -> {
+
         });
 
         hb.getChildren().addAll(city, textFieldCity, date, textFieldDate,btn);
