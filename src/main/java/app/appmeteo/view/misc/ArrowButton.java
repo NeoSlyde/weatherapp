@@ -9,12 +9,10 @@ import javafx.scene.image.ImageView;
 public class ArrowButton extends Button {
     Action onClick;
 
-    private double scale;
     public ImageView img = new ImageView("valid_mres.png");
 
     public ArrowButton(Scene scene, Action onClick, double scale) {
         super("");
-        this.scale = scale;
         
         img.setPreserveRatio(true);
         img.setFitWidth(50);
