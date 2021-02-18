@@ -17,6 +17,7 @@ public class AppMeteo extends Application {
         scene.getStylesheets().add(styleSheet);
         primaryStage.setTitle("Project Z: AppMeteo");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
