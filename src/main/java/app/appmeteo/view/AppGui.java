@@ -1,33 +1,18 @@
 package app.appmeteo.view;
 
+import app.appmeteo.view.TopBar.TopBarComponent;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
-public class AppGui {
+public class AppGui extends BorderPane {
 
-    public static BorderPane create() {
-        BorderPane borderPane = new BorderPane();
-        borderPane.getStyleClass().add("bg-1");
-        //borderPane.setPadding(new Insets(5));
-
-        //TOP
-
-        borderPane.setTop(TopBarComponent.create());
-
-        //LEFT
-        borderPane.setLeft(LeftBarComponnent.create());
-
-        //CENTER
-        borderPane.setCenter(CenterComponent.create());
-        //RIGHT
-        borderPane.setRight(RightBarComponnent.create());
-
-        //Label bottom = createLabel("Bottom", "bg-6");
-        //borderPane.setBottom(bottom);
-
-        return borderPane;
+    public AppGui() {
+        this.getStyleClass().add("bg-1");
+        this.setTop(new TopBarComponent());
+        this.setLeft(LeftBarComponnent.create());
+        this.setCenter(CenterComponent.create());
+        this.setRight(RightBarComponnent.create());
     }
 
     public static Label createLabel(String text, String styleClass) {

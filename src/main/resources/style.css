@@ -27,7 +27,7 @@ Label {
 }
 
 .title {
-    -fx-font-size: 36pt;
+    -fx-font-size: 30pt;
     -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
 }
