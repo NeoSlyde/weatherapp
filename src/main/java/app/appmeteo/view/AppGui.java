@@ -10,7 +10,7 @@ public class AppGui {
     public static BorderPane create() {
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("bg-1");
-        borderPane.setPadding(new Insets(5));
+        //borderPane.setPadding(new Insets(5));
 
         //TOP
 
@@ -24,8 +24,8 @@ public class AppGui {
         //RIGHT
         borderPane.setRight(RightBarComponnent.create());
 
-        Label bottom = createLabel("Bottom", "bg-6");
-        borderPane.setBottom(bottom);
+        //Label bottom = createLabel("Bottom", "bg-6");
+        //borderPane.setBottom(bottom);
 
         return borderPane;
     }

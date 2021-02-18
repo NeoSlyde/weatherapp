@@ -5,24 +5,32 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 
 public class TopBarComponent {
     static HBox create() {
         HBox hb = new HBox();
-        hb.setSpacing(10);
+        hb.setSpacing(0);
 
-        Label city = AppGui.createLabel("Ville: ", "bg-2");
+        Label meteo = AppGui.createLabel("Meteo", "title");
+        Label city = AppGui.createLabel("", "bg-2");
         TextField textFieldCity = new TextField ();
+        textFieldCity.setPromptText("Ville");
         textFieldCity.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\sa-zA-Z*")) {
                 textFieldCity.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
             }
         });
 
-        Label date = AppGui.createLabel("Date: ", "bg-2");
+        Label date = AppGui.createLabel("", "bg-2");
         TextField textFieldDate = new TextField();
         textFieldDate.setPromptText("jj/MM/aaaa");
         textFieldDate.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -36,16 +44,29 @@ public class TopBarComponent {
                 textFieldDate.setText(oldValue);
             }
         });
+        textFieldCity.getStyleClass().add("search");
+        textFieldDate.getStyleClass().add("search");
 
-        Button btn = new Button("Valider");
+        ImageView image = new ImageView("valid.png");
+        ImageView image2 = new ImageView("search.png");
+        Button btn = new Button("");
+        btn.getStyleClass().add("imagebtn");
+        btn.setGraphic(image);
         btn.setOnAction(event -> {
-
+            btn.setGraphic(image2);
+            btn.setGraphic(image);
         });
-
-        hb.getChildren().addAll(city, textFieldCity, date, textFieldDate,btn);
-        hb.setSpacing(5);
         hb.setAlignment(Pos.CENTER);
+        hb.getChildren().addAll(city, textFieldCity, date, textFieldDate,btn);
+        HBox hb2 = new HBox();
+        hb2.getChildren().addAll(meteo,hb);
+        hb2.setSpacing(130);
+        hb2.setPadding(new Insets(0,0,0,20));
 
-        return hb;
+
+        hb2.setBackground(new Background(new BackgroundFill(Color.rgb(55, 55, 55), CornerRadii.EMPTY, Insets.EMPTY)));
+        hb2.setPrefHeight(60);
+
+        return hb2;
     }
 }

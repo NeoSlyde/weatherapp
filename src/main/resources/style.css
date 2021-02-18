@@ -2,6 +2,11 @@
     font-family: "Quicksand";
     src: url(./Quicksand-Regular.ttf) format("truetype");
 }
+@font-face {
+    font-family: "Quicksand";
+    src: url(./Quicksand-Bold.ttf) format("truetype");
+}
+
 
 .root {
     -fx-font-family: "Quicksand";
@@ -17,18 +22,32 @@ Label {
 }
 
 .bg-2 {
+    -fx-background-color: #373737;
+    -fx-text-fill: #FFFFFF;
+}
+
+.title {
+    -fx-font-size: 36pt;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
 }
 
 .bg-3 {
-    -fx-background-color: #ffefc8;
+    -fx-background-color: #ffffff;
 }
 
 .bg-4 {
-    -fx-background-color: #ceffc6;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #373737;
+    -fx-font-size: 42pt;
+    -fx-font-weight: bold;
 }
 
 .bg-5 {
-    -fx-background-color: #befaff;
+    -fx-background-color: #dddddd;
+    -fx-text-fill: #373737;
+    -fx-font-size: 24pt;
+    -fx-font-weight: bold;
 }
 
 .bg-6 {
@@ -36,3 +55,28 @@ Label {
 }
 
 
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+}
+
+.border-pane {
+    -fx-background-color: transparent, -fx-background;
+}
+
+.search {
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 18;
+    -fx-border-color: grey;
+    -fx-border-width: 2;
+    -fx-border-color: #67b7ff;
+    -fx-border-radius: 25px;
+    -fx-border: gone;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+
+}
+
+.imagebtn {
+    -fx-background-color: transparent;
+}

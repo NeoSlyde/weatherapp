@@ -10,9 +10,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javax.naming.Binding;
@@ -24,11 +23,11 @@ public class LeftBarComponnent {
         Favorites favorites = new Favorites();
         VBox vb = new VBox();
 
-        vb.setSpacing(10);
-        vb.setPadding(new Insets(0, 0, 10, 0));
 
-        Label leftLabel = AppGui.createLabel("Villes Favorites ", "bg-5");
-        leftLabel.setPrefWidth(200);
+
+        Label leftLabel = AppGui.createLabel("Favoris", "bg-5");
+        leftLabel.setAlignment(Pos.CENTER);
+        leftLabel.setPrefWidth(250);
         // Button 1
         Button buttonAddCity = new Button("Ajouter");
         Button buttonSelectedCity = new Button("Selectionner");
@@ -37,10 +36,11 @@ public class LeftBarComponnent {
         // TextField
         TextField textField = new TextField();
         textField.setPromptText("Ajouter une ville favorite");
-        textField.setPrefWidth(100);
+        textField.setMaxWidth(240);
 
         //ListView
         ListView<City> listView = new ListView<>();
+        listView.setMaxWidth(240);
 
         buttonSelectedCity.setOnAction(event -> {
             City selectedCity = listView.getSelectionModel().getSelectedItem();
@@ -81,7 +81,11 @@ public class LeftBarComponnent {
             }
         });
         vb.getChildren().addAll(leftLabel,buttonAddCity,textField,listView,buttonSelectedCity,buttonRemoveCity);
+        vb.setSpacing(10);
+        vb.setPadding(new Insets(-50, 0, 10, 0));
 
+        vb.setBackground(new Background(new BackgroundFill(Color.rgb(221,221,221), CornerRadii.EMPTY, Insets.EMPTY)));
+        vb.setAlignment(Pos.CENTER);
 
 
         return vb;
