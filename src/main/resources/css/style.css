@@ -45,10 +45,11 @@
 }
 
 .bg-5 {
-    -fx-background-color: #dddddd;
+    -fx-background-color: #c4c4c4;
     -fx-text-fill: #373737;
     -fx-font-size: 24pt;
     -fx-font-weight: bold;
+    -fx-padding: 20,20,20,20;
 }
 
 .bg-6 {

@@ -70,7 +70,7 @@ public class LeftBarComponent extends VBox {
 
 
         this.getChildren().addAll(leftLabel,listView,textField);
-        this.setSpacing(10);
+        this.setSpacing(25);
         this.setPadding(new Insets(-150, 0, 10, 0));
 
         this.setBackground(new Background(new BackgroundFill(Color.rgb(221,221,221), CornerRadii.EMPTY, Insets.EMPTY)));
