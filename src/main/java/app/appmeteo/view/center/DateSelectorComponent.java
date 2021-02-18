@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class DateSelectorComponent extends HBox {
     private DayAndDate dayAndDate = new DayAndDate();
@@ -25,7 +27,7 @@ public class DateSelectorComponent extends HBox {
 
         setDate(LocalDate.now());
 
-        ColorAdjust adjust = new ColorAdjust(); adjust.setBrightness(-.7); adjust.setSaturation(-1);
+        ColorAdjust adjust = new ColorAdjust(); adjust.setBrightness(-.8); adjust.setSaturation(-1);
         
         ArrowButton prevButton = new ArrowButton(scene, () -> {
             setDate(getDate().get().minusDays(1));
@@ -64,9 +66,11 @@ public class DateSelectorComponent extends HBox {
             this.setSpacing(-10);
 
             dayLabel.setAlignment(Pos.CENTER);
+            dayLabel.setTextFill(Paint.valueOf("#3a3a3a"));
             this.getChildren().add(dayLabel);
 
             dateLabel.setAlignment(Pos.CENTER);
+            dateLabel.setTextFill(Paint.valueOf("#3a3a3a"));
             this.getChildren().add(dateLabel);
         }
     }
