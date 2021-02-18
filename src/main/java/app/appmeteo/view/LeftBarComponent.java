@@ -1,31 +1,20 @@
 package app.appmeteo.view;
 
-import app.appmeteo.model.City;
-import app.appmeteo.model.Favorites;
-import javafx.beans.binding.Bindings;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import app.appmeteo.model.*;
+import javafx.event.*;
+import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
-import javax.naming.Binding;
-import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LeftBarComponnent {
-    static VBox create() {
+public class LeftBarComponent extends VBox {
+    public LeftBarComponent() {
         Favorites favorites = new Favorites();
-        VBox vb = new VBox();
 
 
-
-        Label leftLabel = AppGui.createLabel("Favoris", "bg-5");
+        Label leftLabel = new AppLabel("Favoris", "bg-5");
         leftLabel.setAlignment(Pos.CENTER);
         leftLabel.setPrefWidth(250);
         // Button 1
@@ -80,14 +69,11 @@ public class LeftBarComponnent {
 
             }
         });
-        vb.getChildren().addAll(leftLabel,buttonAddCity,textField,listView,buttonSelectedCity,buttonRemoveCity);
-        vb.setSpacing(10);
-        vb.setPadding(new Insets(-50, 0, 10, 0));
+        this.getChildren().addAll(leftLabel,buttonAddCity,textField,listView,buttonSelectedCity,buttonRemoveCity);
+        this.setSpacing(10);
+        this.setPadding(new Insets(-50, 0, 10, 0));
 
-        vb.setBackground(new Background(new BackgroundFill(Color.rgb(221,221,221), CornerRadii.EMPTY, Insets.EMPTY)));
-        vb.setAlignment(Pos.CENTER);
-
-
-        return vb;
+        this.setBackground(new Background(new BackgroundFill(Color.rgb(221,221,221), CornerRadii.EMPTY, Insets.EMPTY)));
+        this.setAlignment(Pos.CENTER);
     }
 }

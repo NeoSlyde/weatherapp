@@ -7,20 +7,19 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class RightBarComponnent {
-    static HBox create(){
+public class RightBarComponnent extends HBox {
+    public RightBarComponnent() {
         VBox vb = new VBox();
         vb.setSpacing(10);
-        Label rightLabel = AppGui.createLabel("", "bg-3");
+        Label rightLabel = new AppLabel("", "bg-3");
         rightLabel.setPrefWidth(250);
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
         vb.getChildren().add(rightLabel);
         vb.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255), CornerRadii.EMPTY, Insets.EMPTY)));
-        HBox hb = new HBox();
-        hb.getChildren().add(vb);
-        hb.getChildren().add(0, separator);
-        return hb;
+
+        this.getChildren().add(vb);
+        this.getChildren().add(0, separator);
     }
 
 }

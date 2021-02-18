@@ -1,6 +1,6 @@
 package app.appmeteo;
 
-import app.appmeteo.view.AppGui;
+import app.appmeteo.view.AppScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -9,14 +9,16 @@ import javafx.stage.Stage;
 public class AppMeteo extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene(new AppGui(), 1200,800);
+    public void start(Stage window) throws Exception {
+        Scene scene = new AppScene();
         String styleSheet = getClass().getResource("/style.css").toExternalForm();
         scene.getStylesheets().add(styleSheet);
-        primaryStage.setTitle("Project Z: AppMeteo");
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        window.setTitle("Project Z: AppMeteo");
+        window.setScene(scene);
+        window.setResizable(false);
+        // TODO: movement when dragging our own top bar and close button
+        // window.initStyle(StageStyle.UNDECORATED);
+        window.show();
     }
 
     public static void main(String[] args) { launch(args); }
