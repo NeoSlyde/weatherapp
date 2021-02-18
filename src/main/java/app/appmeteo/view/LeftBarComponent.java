@@ -1,6 +1,7 @@
 package app.appmeteo.view;
 
 import app.appmeteo.model.*;
+import app.appmeteo.view.misc.AppLabel;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.Scene;

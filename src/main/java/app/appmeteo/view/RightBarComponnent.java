@@ -1,5 +1,6 @@
 package app.appmeteo.view;
 
+import app.appmeteo.view.misc.AppLabel;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;

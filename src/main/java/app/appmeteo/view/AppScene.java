@@ -1,6 +1,7 @@
 package app.appmeteo.view;
 
-import app.appmeteo.view.TopBar.TopBarComponent;
+import app.appmeteo.view.center.CenterComponent;
+import app.appmeteo.view.topBar.TopBarComponent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 

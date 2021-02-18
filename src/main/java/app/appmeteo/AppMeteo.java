@@ -11,8 +11,10 @@ public class AppMeteo extends Application {
     @Override
     public void start(Stage window) throws Exception {
         Scene scene = new AppScene();
-        String styleSheet = getClass().getResource("/style.css").toExternalForm();
-        scene.getStylesheets().add(styleSheet);
+        scene.getStylesheets().addAll(
+            getClass().getResource("/css/style.css").toExternalForm(),
+            getClass().getResource("/css/center.css").toExternalForm()
+        );
         window.setTitle("Project Z: AppMeteo");
         window.setScene(scene);
         window.setResizable(false);

@@ -1,10 +1,15 @@
 @font-face {
     font-family: "Quicksand";
-    src: url(./Quicksand-Regular.ttf) format("truetype");
+    src: url(../fonts/Quicksand-Regular.ttf) format("truetype");
 }
 @font-face {
     font-family: "Quicksand";
-    src: url(./Quicksand-Bold.ttf) format("truetype");
+    src: url(../fonts/Quicksand-Bold.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Quicksand";
+    src: url(../fonts/Quicksand-Medium.ttf) format("truetype");
 }
 
 

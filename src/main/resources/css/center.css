@@ -1,0 +1,9 @@
+
+.day {
+    -fx-font-size: 40pt;
+    -fx-font-weight: bold;
+}
+
+.date {
+    -fx-font-size: 20pt;
+}

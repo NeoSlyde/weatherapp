@@ -1,4 +1,4 @@
-package app.appmeteo.view.TopBar;
+package app.appmeteo.view.topBar;
 
 import javafx.scene.control.TextField;
 

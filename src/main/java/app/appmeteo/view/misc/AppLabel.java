@@ -1,4 +1,4 @@
-package app.appmeteo.view;
+package app.appmeteo.view.misc;
 
 import javafx.scene.control.Label;
 
