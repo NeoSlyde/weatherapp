@@ -2,6 +2,7 @@ package app.appmeteo.view;
 
 import app.appmeteo.view.center.CenterComponent;
 import app.appmeteo.view.topBar.TopBarComponent;
+import app.appmeteo.view.leftBar.LeftBarComponent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
