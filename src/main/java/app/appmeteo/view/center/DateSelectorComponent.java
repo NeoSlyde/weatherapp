@@ -46,7 +46,6 @@ public class DateSelectorComponent extends HBox {
         this.getChildren().add(nextButton);
     }
 
-
     public void setDate(LocalDate date) {
         this.date = date;
         dayAndDate.dayLabel.setText(DateTools.getDay(date));

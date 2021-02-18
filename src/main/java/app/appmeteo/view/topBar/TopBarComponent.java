@@ -1,5 +1,7 @@
 package app.appmeteo.view.topBar;
 
+import app.appmeteo.view.center.CenterComponent;
+import app.appmeteo.view.center.DateSelectorComponent;
 import app.appmeteo.view.misc.*;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
@@ -28,7 +30,9 @@ public class TopBarComponent extends HBox {
             this.getChildren().add(new CityTextField());
             this.getChildren().add(new DateTextField());
             this.getChildren().add(new ArrowButton(scene, () -> {
-                System.out.println("cc");
+                TextField city = (TextField) this.getChildren().get(0);
+                TextField date = (TextField) this.getChildren().get(1);
+                System.out.println(city.getText() +" "+ date.getText());
             }, .65));
         }
     }
