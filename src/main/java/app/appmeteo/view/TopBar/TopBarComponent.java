@@ -17,7 +17,7 @@ public class TopBarComponent extends HBox {
         this.setSpacing(200);
         this.setPadding(new Insets(0, 0, 0, 20));
         this.setBackground(new Background(new BackgroundFill(Color.rgb(55, 55, 55), CornerRadii.EMPTY, Insets.EMPTY)));
-        this.setPrefHeight(60);
+        this.setPrefHeight(70);
     }
 
     private static class MiddleSection extends HBox {

@@ -16,8 +16,6 @@ public class AppMeteo extends Application {
         window.setTitle("Project Z: AppMeteo");
         window.setScene(scene);
         window.setResizable(false);
-        // TODO: movement when dragging our own top bar and close button
-        // window.initStyle(StageStyle.UNDECORATED);
         window.show();
     }
 
