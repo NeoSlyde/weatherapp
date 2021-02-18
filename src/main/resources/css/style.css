@@ -82,3 +82,14 @@
 .imagebtn {
     -fx-background-color: transparent;
 }
+
+.addCity{
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 18;
+    -fx-border-color: grey;
+    -fx-border-width: 2;
+    -fx-border-radius: 25px;
+    -fx-border: gone;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
