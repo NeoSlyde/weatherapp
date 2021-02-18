@@ -69,12 +69,13 @@ Label {
     -fx-font-size: 18;
     -fx-border-color: grey;
     -fx-border-width: 2;
-    -fx-border-color: #67b7ff;
     -fx-border-radius: 25px;
     -fx-border: gone;
     -fx-background-color: transparent;
     -fx-text-fill: white;
-
+}
+.search:focused {
+    -fx-border-color: #67b7ff;
 }
 
 .imagebtn {
