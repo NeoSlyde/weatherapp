@@ -3,12 +3,13 @@ package app.appmeteo.view.TopBar;
 import app.appmeteo.view.AppLabel;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 
 public class TopBarComponent extends HBox {    
-    public TopBarComponent() {
-        HBox middleSection = new MiddleSection();
+    public TopBarComponent(Scene scene) {
+        HBox middleSection = new MiddleSection(scene);
         Label meteoLogo = new AppLabel("Meteo", "title");
         meteoLogo.setPadding(new Insets(0, 0, 0, 12));
         this.getChildren().addAll(meteoLogo, middleSection);
@@ -20,13 +21,13 @@ public class TopBarComponent extends HBox {
     }
 
     private static class MiddleSection extends HBox {
-        MiddleSection() {
+        MiddleSection(Scene scene) {
             this.setSpacing(20);
             this.setAlignment(Pos.CENTER);
 
             this.getChildren().add(new CityTextField());
             this.getChildren().add(new DateTextField());
-            this.getChildren().add(new SearchButton());
+            this.getChildren().add(new SearchButton(scene));
         }
     }
 }

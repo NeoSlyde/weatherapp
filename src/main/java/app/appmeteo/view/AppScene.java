@@ -10,9 +10,9 @@ public class AppScene extends Scene {
         BorderPane layout = (BorderPane) this.getRoot();
 
         layout.getStyleClass().add("bg-1");
-        layout.setTop(new TopBarComponent());
-        layout.setLeft(new LeftBarComponent());
-        layout.setCenter(new CenterComponent());
-        layout.setRight(new RightBarComponnent());
+        layout.setTop(new TopBarComponent(this));
+        layout.setLeft(new LeftBarComponent(this));
+        layout.setCenter(new CenterComponent(this));
+        layout.setRight(new RightBarComponnent(this));
     }
 }

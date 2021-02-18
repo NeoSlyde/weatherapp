@@ -3,6 +3,7 @@ package app.appmeteo.view;
 import app.appmeteo.model.*;
 import javafx.event.*;
 import javafx.geometry.*;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -10,7 +11,7 @@ import javafx.scene.paint.Color;
 import java.util.Arrays;
 
 public class LeftBarComponent extends VBox {
-    public LeftBarComponent() {
+    public LeftBarComponent(Scene scene) {
         Favorites favorites = new Favorites();
 
 
