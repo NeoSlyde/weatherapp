@@ -90,6 +90,10 @@
     -fx-border-width: 2;
     -fx-border-radius: 25px;
     -fx-border: gone;
-    -fx-background-color: transparent;
+    -fx-background-radius: 25px;
     -fx-text-fill: black;
+}
+
+.addCity:focused{
+    -fx-border-color: #67b7ff;
 }
