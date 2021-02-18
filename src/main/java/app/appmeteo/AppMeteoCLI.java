@@ -2,6 +2,7 @@ package app.appmeteo;
 
 import app.appmeteo.controller.OpenWeatherMapAPI;
 import app.appmeteo.model.City;
+import app.appmeteo.model.date.DateTools;
 import app.appmeteo.model.weather.CurrentWeather;
 import app.appmeteo.model.weather.MultiTempWeather;
 
@@ -24,15 +25,9 @@ public class AppMeteoCLI {
         }
 
         Optional<LocalDate> date = Optional.empty();
-        if (args.length == 2) {
-            try {
-                int day = Integer.parseInt(args[1].substring(0, 2));
-                int month = Integer.parseInt(args[1].substring(3, 5));
-                int year = Integer.parseInt(args[1].substring(6, 10));
-                if (day < 1 || day > 31 || month < 1 || month > 12)
-                    throw new IllegalArgumentException();
-                date = Optional.of(LocalDate.of(year, month, day));
-            } catch (IllegalArgumentException e) {
+        if (args.length > 1) {
+            date = DateTools.parseDate(args[1]);
+            if (date.isEmpty()) {
                 System.out.println("Erreur: Date invalide");
                 System.out.println("Format: jj/MM/aaaa");
                 System.exit(-1);
@@ -45,7 +40,7 @@ public class AppMeteoCLI {
 
         OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
 
-        if (date.isPresent()) { 
+        if (date.isPresent()) {
             // i.e if the user specified the date
             System.out.println("Voici la météo à " + args[0] + " le " + args[1] + ":");
             List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(args[0]));
