@@ -19,21 +19,22 @@ import javafx.scene.paint.Paint;
 
 public class InformationComponent extends HBox {
     public static InformationController information = new InformationController();
-
+    public static Label centerLabel = new AppLabel("", "day");
 
     public InformationComponent(Scene scene) {
-
-
-
         this.setAlignment(Pos.CENTER);
         this.setSpacing(15);
         this.setPadding(new Insets(40, 0, 0, 0));
 
-        Label leftLabel = new AppLabel(information.getCity(), "day");
-        leftLabel.setAlignment(Pos.CENTER);
-        leftLabel.setPrefWidth(250);
 
-        this.getChildren().addAll(leftLabel);
+        centerLabel.setAlignment(Pos.CENTER);
+        centerLabel.setPrefWidth(250);
+
+        this.getChildren().addAll(centerLabel);
+
+    }
+
+    public void setCity(){
 
     }
 }
