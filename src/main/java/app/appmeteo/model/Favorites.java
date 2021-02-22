@@ -2,6 +2,7 @@ package app.appmeteo.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Favorites {
 
@@ -16,6 +17,10 @@ public class Favorites {
 
     public void add(City city){
         this.favList.add(city);
+    }
+
+    public Optional<City> get(String name) {
+        return favList.stream().filter(c -> c.toString() == name).findAny();
     }
 
     public void remove(City city){

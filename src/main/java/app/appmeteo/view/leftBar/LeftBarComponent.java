@@ -11,31 +11,31 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-
 public class LeftBarComponent extends VBox {
     public LeftBarComponent(Scene scene) {
         Favorites favorites = new Favorites();
 
         Label leftLabel = new AppLabel("Favoris", "bg-5");
-        leftLabel.setAlignment(Pos.CENTER);
-        leftLabel.setPrefWidth(250);
+        leftLabel.setPadding(new Insets(20,20,20,34));
 
         // TextField
         TextField textField = new TextField();
-        textField.setPromptText("Ajouter une ville favorite");
-        textField.setMaxWidth(240);
+        textField.setPromptText("Ajouter un favori");
+        textField.setMaxWidth(178);
+        VBox.setMargin(textField, new Insets(0, 0, 0, 30));
 
         textField.getStyleClass().add("addCity");
 
-        //ListView
-        ListView<City> listView = new ListView<>();
+        // ListView
+        ListView<Label> listView = new ListView<>();
         listView.setMaxWidth(240);
+        listView.setPrefHeight(430);
 
         textField.setOnKeyReleased(keyEvent -> {
-            if(keyEvent.getCode() == KeyCode.ENTER){
+            if (keyEvent.getCode() == KeyCode.ENTER) {
                 City city = new City(textField.getText());
                 boolean success = false;
-                for (City city1 : favorites.getList()){
+                for (City city1 : favorites.getList()) {
                     if (city.equals(city1)) {
                         success = false;
                         break;
@@ -44,16 +44,20 @@ public class LeftBarComponent extends VBox {
                 }
                 if (favorites.getList().isEmpty() || success) {
                     favorites.add(city);
-                    listView.getItems().add(city);
+                    textField.setText("");
+                    
+                    Label cityLabel = new AppLabel(city.toString(), "favorites-item-label");
+                    listView.getItems().add(cityLabel);
+                    cityLabel.setPadding(new Insets(0, 0, 15, 25));
                 }
             }
         });
 
         listView.setOnKeyReleased(keyEvent -> {
-            if(keyEvent.getCode() == KeyCode.DELETE){
+            if (keyEvent.getCode() == KeyCode.DELETE) {
                 int selectedIndices = listView.getSelectionModel().getSelectedIndex();
-                City selectedCity = listView.getSelectionModel().getSelectedItem();
-                favorites.remove(selectedCity);
+                Label selectedCityLabel = listView.getSelectionModel().getSelectedItem();
+                favorites.get(selectedCityLabel.getText()).ifPresent(c -> favorites.remove(c));
                 listView.getItems().remove(selectedIndices);
             }
         });
@@ -61,19 +65,17 @@ public class LeftBarComponent extends VBox {
         listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(!listView.getItems().isEmpty()) {
-                    City selectedCity = listView.getSelectionModel().getSelectedItem();
-                    System.out.println("Tu as selectionne : " + selectedCity.toString());
+                if (!listView.getItems().isEmpty()) {
+                    Label selectedCityLabel = listView.getSelectionModel().getSelectedItem();
+                    System.out.println("Tu as selectionne : " + selectedCityLabel.getText());
                 }
             }
         });
 
-
-        this.getChildren().addAll(leftLabel,listView,textField);
+        this.getChildren().addAll(leftLabel, listView, textField);
         this.setSpacing(25);
-        this.setPadding(new Insets(-50, 0, 10, 0));
 
-        this.setBackground(new Background(new BackgroundFill(Color.rgb(221,221,221), CornerRadii.EMPTY, Insets.EMPTY)));
-        this.setAlignment(Pos.CENTER);
+        this.setBackground(
+                new Background(new BackgroundFill(Color.rgb(221, 221, 221), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 }
