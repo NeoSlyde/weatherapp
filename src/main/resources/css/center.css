@@ -19,3 +19,12 @@
     -fx-font-weight: bold;
     -fx-text-fill : #0000000b;
 }
+
+.part-of-the-day-name {
+    -fx-font-size: 33pt;
+    -fx-text-fill : #373737;
+}
+.part-of-the-day-temperature {
+    -fx-font-size: 20pt;
+    -fx-text-fill : #373737;
+}
