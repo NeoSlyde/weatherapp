@@ -1,7 +1,5 @@
 package app.appmeteo.view.topBar;
 
-import app.appmeteo.view.center.CenterComponent;
-import app.appmeteo.view.center.DateSelectorComponent;
 import app.appmeteo.view.misc.*;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
