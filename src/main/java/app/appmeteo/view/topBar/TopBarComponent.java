@@ -36,7 +36,6 @@ public class TopBarComponent extends HBox {
                 System.out.println(city.getText() +" "+ date.getText());
 
                 InformationComponent.information.setCity(city.getText());
-                InformationComponent.centerLabel.setText(city.getText());
             }, .65));
         }
     }
