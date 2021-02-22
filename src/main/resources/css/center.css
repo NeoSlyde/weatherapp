@@ -7,3 +7,15 @@
 .date {
     -fx-font-size: 20pt;
 }
+
+.city-label {
+    -fx-font-size: 30pt;
+    -fx-font-weight: bold;
+    -fx-text-fill : #55A7F2;
+}
+
+.city-watermark {
+    -fx-font-size: 210pt;
+    -fx-font-weight: bold;
+    -fx-text-fill : #0000000b;
+}

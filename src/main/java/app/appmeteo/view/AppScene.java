@@ -8,13 +8,13 @@ import javafx.scene.layout.BorderPane;
 
 public class AppScene extends Scene {
     public AppScene() {
-        super(new BorderPane(), 1200, 800);
+        super(new BorderPane(), 1200, 700);
         BorderPane layout = (BorderPane) this.getRoot();
 
         layout.getStyleClass().add("bg-1");
+        layout.setCenter(new CenterComponent(this));
         layout.setTop(new TopBarComponent(this));
         layout.setLeft(new LeftBarComponent(this));
-        layout.setCenter(new CenterComponent(this));
         layout.setRight(new RightBarComponnent(this));
     }
 }
