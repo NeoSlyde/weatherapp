@@ -7,10 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 
 public class CenterComponent extends VBox {
-    AppLabel cityLabel = new AppLabel("", "city-label");
-    AppLabel cityWatermark = new AppLabel("", "city-watermark");
+    private AppLabel cityLabel = new AppLabel("", "city-label");
+    private AppLabel cityWatermark = new AppLabel("", "city-watermark");
 
-    void setCity(City city) {
+    public void setCity(City city) {
         cityLabel.setText(city.toString());
         cityWatermark.setText(city.toString());
     }
