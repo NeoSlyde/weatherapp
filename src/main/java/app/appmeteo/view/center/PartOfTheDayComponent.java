@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
  */
 public class PartOfTheDayComponent extends HBox {
     private Label nameLabel;
-    private Label temperatureLabel = new AppLabel("", "part-of-the-day-temperature");
+    public static Label temperatureLabel = new AppLabel("", "part-of-the-day-temperature");
     // TODO: Icons
 
     public void setTemperature(int temperature) {

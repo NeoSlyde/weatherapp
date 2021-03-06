@@ -18,4 +18,7 @@ public class Temperature {
     public String toString() {
         return (int)toCelcius() + "°C";
     }
+    public int toInt() {
+        return (int)toCelcius();
+    }
 }

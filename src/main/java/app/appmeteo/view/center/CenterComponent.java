@@ -6,12 +6,14 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 
+import java.awt.*;
+
 public class CenterComponent extends VBox {
-    private AppLabel cityLabel = new AppLabel("", "city-label");
-    private AppLabel cityWatermark = new AppLabel("", "city-watermark");
+    public static AppLabel cityLabel = new AppLabel("", "city-label");
+    public static AppLabel cityWatermark = new AppLabel("", "city-watermark");
 
     private PartOfTheDayComponent morningComponent = new PartOfTheDayComponent("Matin");
-    private PartOfTheDayComponent afternoonComponent = new PartOfTheDayComponent("Après-Midi");
+    private PartOfTheDayComponent afternoonComponent = new PartOfTheDayComponent("Apres-Midi");
 
     public PartOfTheDayComponent getMorningComponent() {
         return morningComponent;
