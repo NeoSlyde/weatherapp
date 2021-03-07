@@ -7,13 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 
 import java.awt.*;
+import java.time.LocalDate;
 
 public class CenterComponent extends VBox {
-    public static AppLabel cityLabel = new AppLabel("", "city-label");
-    public static AppLabel cityWatermark = new AppLabel("", "city-watermark");
+    private AppLabel cityLabel = new AppLabel("", "city-label");
+    private AppLabel cityWatermark = new AppLabel("", "city-watermark");
+    private DateSelectorComponent dateSelectorComponent;
 
     private PartOfTheDayComponent morningComponent = new PartOfTheDayComponent("Matin");
-    private PartOfTheDayComponent afternoonComponent = new PartOfTheDayComponent("Apres-Midi");
+    private PartOfTheDayComponent afternoonComponent = new PartOfTheDayComponent("Après-Midi");
 
     public PartOfTheDayComponent getMorningComponent() {
         return morningComponent;
@@ -27,8 +29,13 @@ public class CenterComponent extends VBox {
         cityWatermark.setText(city.toString());
     }
 
+    public void setDate(LocalDate date){
+        dateSelectorComponent.setDate(date);
+    }
+
     public CenterComponent(Scene scene) {
-        this.getChildren().add(new DateSelectorComponent(scene));
+        dateSelectorComponent = new DateSelectorComponent(scene);
+        this.getChildren().add(dateSelectorComponent);
 
         Pane pane = new Pane();
         this.getChildren().add(pane);

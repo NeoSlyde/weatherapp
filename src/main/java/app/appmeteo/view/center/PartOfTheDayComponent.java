@@ -8,16 +8,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * This represents a single line in the center component e.g "Matin" + "8Â°C" +
+ * This represents a single line in the center component e.g "Matin" + "8°C" +
  * "some icon"
  */
 public class PartOfTheDayComponent extends HBox {
     private Label nameLabel;
-    public static Label temperatureLabel = new AppLabel("", "part-of-the-day-temperature");
+    public Label temperatureLabel = new AppLabel("", "part-of-the-day-temperature");
     // TODO: Icons
 
     public void setTemperature(int temperature) {
-        temperatureLabel.setText(temperature + "Â°C");
+        temperatureLabel.setText(temperature + "°C");
     }
 
     public PartOfTheDayComponent(String name) {
