@@ -15,15 +15,11 @@ import javafx.scene.paint.Color;
 
 public class RightBarComponnent extends HBox {
 
-<<<<<<< HEAD
     static ListView<VBox> listView = new ListView<>();
 
-=======
     static VBox vb = new VBox();
-    static ListView<VBox> listView = new ListView<>();
 
 
->>>>>>> 0916ad0fffb668cbc66df114f4ffa17fe10efecf
     public RightBarComponnent(Scene scene) {
         listView.setPrefHeight(650);
 
