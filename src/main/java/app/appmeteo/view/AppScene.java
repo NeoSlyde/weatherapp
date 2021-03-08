@@ -4,6 +4,7 @@ import app.appmeteo.model.City;
 import app.appmeteo.model.date.DateTools;
 import app.appmeteo.view.center.CenterComponent;
 import app.appmeteo.view.misc.ArrowButton;
+import app.appmeteo.view.rightBar.RightBarComponnent;
 import app.appmeteo.view.topBar.TopBarComponent;
 import app.appmeteo.view.leftBar.LeftBarComponent;
 import javafx.scene.Scene;
