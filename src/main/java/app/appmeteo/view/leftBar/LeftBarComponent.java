@@ -2,6 +2,7 @@ package app.appmeteo.view.leftBar;
 
 import app.appmeteo.model.*;
 import app.appmeteo.view.misc.AppLabel;
+import app.appmeteo.view.rightBar.RightBarComponnent;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.Scene;
@@ -49,6 +50,8 @@ public class LeftBarComponent extends VBox {
                     Label cityLabel = new AppLabel(city.toString(), "favorites-item-label");
                     listView.getItems().add(cityLabel);
                     cityLabel.setPadding(new Insets(0, 0, 15, 25));
+
+                    RightBarComponnent.addLabel(city);
                 }
             }
         });
@@ -59,6 +62,8 @@ public class LeftBarComponent extends VBox {
                 Label selectedCityLabel = listView.getSelectionModel().getSelectedItem();
                 favorites.get(selectedCityLabel.getText()).ifPresent(c -> favorites.remove(c));
                 listView.getItems().remove(selectedIndices);
+
+                RightBarComponnent.remove(selectedIndices);
             }
         });
 
