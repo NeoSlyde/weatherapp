@@ -23,9 +23,6 @@ import java.util.Optional;
 public class RightBarLabel extends VBox {
 
     private Label cityLabel;
-
-    private City city;
-
     private Label temperatureLabel = new AppLabel("","part-of-the-day-temperature");
 
     public RightBarLabel(City city){
@@ -40,10 +37,6 @@ public class RightBarLabel extends VBox {
             setTemperature(w.dayTemperature.toInt());
         }, () -> System.out.println("M�t�o introuvable"));
 
-
-        this.city = city;
-
-        setTemperature(8);
         cityLabel.setAlignment(Pos.CENTER);
         temperatureLabel.setPadding(new Insets(20, 0, 10, 150));
 
