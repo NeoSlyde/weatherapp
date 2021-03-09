@@ -26,7 +26,7 @@ public class RightBarLabel extends VBox {
     private Label temperatureLabel = new AppLabel("","part-of-the-day-temperature");
 
     public RightBarLabel(City city){
-        this.cityLabel = new AppLabel(city.toString(), "city-label");
+        this.cityLabel = new AppLabel(city.toString(), "city-label-right");
 
         LocalDate currentDate = LocalDate.now();
         OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
@@ -35,7 +35,7 @@ public class RightBarLabel extends VBox {
         Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, currentDate);
         weather.ifPresentOrElse(w -> {
             setTemperature(w.dayTemperature.toInt());
-        }, () -> System.out.println("M�t�o introuvable"));
+        }, () -> System.out.println("Météo introuvable"));
 
         cityLabel.setAlignment(Pos.CENTER);
         temperatureLabel.setPadding(new Insets(20, 0, 10, 150));

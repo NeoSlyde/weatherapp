@@ -14,6 +14,11 @@
     -fx-text-fill : #55A7F2;
 }
 
+.city-label-right {
+    -fx-font-size: 24pt;
+    -fx-text-fill : #373737;
+}
+
 .city-watermark {
     -fx-font-size: 210pt;
     -fx-font-weight: bold;

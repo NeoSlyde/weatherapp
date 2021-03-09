@@ -10,5 +10,6 @@ public class CityTextField extends TextField {
                 this.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
         });
         this.getStyleClass().add("search");
+        this.setPrefWidth(350);
     }
 }

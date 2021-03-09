@@ -28,7 +28,7 @@ public class TopBarComponent extends HBox{
         middleSection = new MiddleSection(scene, appScene);
         meteoLogo.setPadding(new Insets(0, 0, 0, 12));
         this.getChildren().addAll(meteoLogo, middleSection);
-        this.setSpacing(200);
+        this.setSpacing(276);
         this.setPadding(new Insets(0, 0, 0, 20));
         this.setBackground(new Background(new BackgroundFill(Color.rgb(55, 55, 55), CornerRadii.EMPTY, Insets.EMPTY)));
         this.setPrefHeight(70);
@@ -36,21 +36,20 @@ public class TopBarComponent extends HBox{
 
     private class MiddleSection extends HBox {
         MiddleSection(Scene scene, AppScene appScene) {
-            this.setSpacing(20);
+            this.setSpacing(-45);
             this.setAlignment(Pos.CENTER);
 
             this.getChildren().add(new CityTextField());
-            this.getChildren().add(new DateTextField());
+            //this.getChildren().add(new DateTextField());
 
             this.getChildren().add(new ArrowButton(scene, () -> {
                 TextField cityInput = (TextField) this.getChildren().get(0);
-                TextField dateInput = (TextField) this.getChildren().get(1);
+                //TextField dateInput = (TextField) this.getChildren().get(1);
                 appScene.setCenterLabels(new City(cityInput.getText()));
 
-                Optional<LocalDate> date = Optional.empty();
-                date = DateTools.parseDate(dateInput.getText());
+                //Optional<LocalDate> date = Optional.empty();
+                Optional<LocalDate> date = appScene.getCenterDate();
                 if(date.isPresent()){
-                    appScene.setDate(date.get());
                     OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
                     List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(cityInput.getText()));
                     Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
@@ -58,7 +57,8 @@ public class TopBarComponent extends HBox{
                         appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
                     }, () -> System.out.println("Météo introuvable"));
                 }
-            }, .65));
+                appScene.activate();
+            }, .40));
 
         }
     }

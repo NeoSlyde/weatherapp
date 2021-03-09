@@ -28,6 +28,7 @@ public class RightBarComponnent extends HBox {
 
         this.getChildren().add(listView);
         this.getChildren().add(0, separator);
+        this.setId("bg-3");
     }
 
     public static void addLabel(City city){
