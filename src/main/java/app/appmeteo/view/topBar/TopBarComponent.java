@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 import java.time.LocalDate;
@@ -39,15 +40,13 @@ public class TopBarComponent extends HBox{
             this.setSpacing(-45);
             this.setAlignment(Pos.CENTER);
 
-            this.getChildren().add(new CityTextField());
-            //this.getChildren().add(new DateTextField());
+            CityTextField cityTextField = new CityTextField();
+            this.getChildren().add(cityTextField);
 
-            this.getChildren().add(new ArrowButton(scene, () -> {
+            ArrowButton.Action searchCallback = () -> {
                 TextField cityInput = (TextField) this.getChildren().get(0);
-                //TextField dateInput = (TextField) this.getChildren().get(1);
                 appScene.setCenterLabels(new City(cityInput.getText()));
-
-                //Optional<LocalDate> date = Optional.empty();
+        
                 Optional<LocalDate> date = appScene.getCenterDate();
                 if(date.isPresent()){
                     OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
@@ -55,11 +54,15 @@ public class TopBarComponent extends HBox{
                     Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
                     weather.ifPresentOrElse(w -> {
                         appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                    }, () -> System.out.println("Météo introuvable"));
+                    }, () -> System.out.println("Mï¿½tï¿½o introuvable"));
                 }
                 appScene.activate();
-            }, .40));
-
+            };
+            this.getChildren().add(new ArrowButton(scene, searchCallback, .40));
+            cityTextField.setOnKeyReleased(keyEvent -> {
+                if (keyEvent.getCode() == KeyCode.ENTER) 
+                    searchCallback.run();
+            });
         }
     }
 }
