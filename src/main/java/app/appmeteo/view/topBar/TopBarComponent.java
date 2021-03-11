@@ -13,9 +13,11 @@ import javafx.scene.Parent;
 import javafx.scene.layout.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -45,18 +47,31 @@ public class TopBarComponent extends HBox{
 
             ArrowButton.Action searchCallback = () -> {
                 TextField cityInput = (TextField) this.getChildren().get(0);
-                appScene.setCenterLabels(new City(cityInput.getText()));
-        
-                Optional<LocalDate> date = appScene.getCenterDate();
-                if(date.isPresent()){
-                    OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
-                    List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(cityInput.getText()));
-                    Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
-                    weather.ifPresentOrElse(w -> {
-                        appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                    }, () -> System.out.println("Méteo introuvable"));
+                if (cityInput.getText().isEmpty()) return;
+                try {
+                    if (!OpenWeatherMapAPI.singleton.fetchCityExists(cityInput.getText())) {
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText("Chargement de la meteo");
+                        alert.setContentText("La ville `" + cityInput.getText() + "` n'existe pas");
+                        alert.showAndWait();
+                        return;
+                    }
+                    appScene.setCenterLabels(new City(cityInput.getText()));
+            
+                    Optional<LocalDate> date = appScene.getCenterDate();
+                    if(date.isPresent()){
+                        OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
+                        List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(cityInput.getText()));
+                        Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
+                        weather.ifPresentOrElse(w -> {
+                            appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
+                        }, () -> System.out.println("Méteo introuvable"));
+                    }
+                    appScene.activate();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                appScene.activate();
             };
             this.getChildren().add(new ArrowButton(scene, searchCallback, .40));
             cityTextField.setOnKeyReleased(keyEvent -> {
