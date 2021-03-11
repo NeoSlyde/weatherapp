@@ -21,8 +21,8 @@
 }
 .city-label-right-temp {
     -fx-font-size: 16pt;
+    -fx-text-fill : #373737;
 }
-
 .city-watermark {
     -fx-font-size: 210pt;
     -fx-font-weight: bold;
