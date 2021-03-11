@@ -23,7 +23,7 @@ import java.util.Optional;
 public class RightBarLabel extends VBox {
 
     private Label cityLabel;
-    private Label temperatureLabel = new AppLabel("","part-of-the-day-temperature");
+    private Label temperatureLabel = new AppLabel("","city-label-right-temp");
 
     public RightBarLabel(City city){
         this.cityLabel = new AppLabel(city.toString(), "city-label-right");
@@ -39,6 +39,7 @@ public class RightBarLabel extends VBox {
 
         cityLabel.setAlignment(Pos.CENTER);
         temperatureLabel.setPadding(new Insets(20, 0, 10, 150));
+        this.setPadding(new Insets(30, 0, 0, 0));
 
         this.getChildren().add(cityLabel);
         this.getChildren().add(temperatureLabel);
