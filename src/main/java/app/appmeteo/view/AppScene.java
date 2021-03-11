@@ -26,7 +26,7 @@ public class AppScene extends Scene {
         layout.setTop(topBarComponent);
         layout.setLeft(leftBarComponent);
         layout.setRight(rightBarComponent);
-
+        activate();
     }
 
     public void setCenterLabels(City city){
