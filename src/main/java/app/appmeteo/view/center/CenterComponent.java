@@ -60,7 +60,7 @@ public class CenterComponent extends VBox {
 
         pane.getChildren().add(cityLabel);
         cityLabel.setPadding(new Insets(25, 0, 0, 50));
-        setCity(new City("Rennes")); // ! Temporary
+        setCity(new City("Marseille"));
         pane.getChildren().add(cityWatermark);
         cityWatermark.setPadding(new Insets(-15, 0, 0, -90));
 
