@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -54,30 +55,44 @@ public class LeftBarComponent extends VBox {
 
         textField.setOnKeyReleased(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (textField.getText().isEmpty()) return;
                 City city = new City(textField.getText());
-                boolean success = false;
-                for (City city1 : favorites.getList()) {
-                    if (city.equals(city1)) {
-                        success = false;
-                        break;
+                try {
+                    if (!OpenWeatherMapAPI.singleton.fetchCityExists(city.toString())) {
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText("Chargement de la meteo");
+                        alert.setContentText("La ville `" + city + "` n'existe pas");
+                        alert.showAndWait();
+                        
+                        return;
                     }
-                    success = true;
-                }
-                if (favorites.getList().isEmpty() || success) {
-                    favorites.add(city);
-                    textField.setText("");
-
-                    Label cityLabel = new AppLabel(city.toString(), "favorites-item-label");
-                    listView.getItems().add(cityLabel);
-                    cityLabel.setPadding(new Insets(0, 0, 15, 25));
-
-                    try {
-                        favorites.writeFavorite2File();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    boolean success = false;
+                    for (City city1 : favorites.getList()) {
+                        if (city.equals(city1)) {
+                            success = false;
+                            break;
+                        }
+                        success = true;
                     }
-
-                    RightBarComponnent.addLabel(city);
+                    if (favorites.getList().isEmpty() || success) {
+                        favorites.add(city);
+                        textField.setText("");
+    
+                        Label cityLabel = new AppLabel(city.toString(), "favorites-item-label");
+                        listView.getItems().add(cityLabel);
+                        cityLabel.setPadding(new Insets(0, 0, 15, 25));
+    
+                        try {
+                            favorites.writeFavorite2File();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+    
+                        RightBarComponnent.addLabel(city);
+                    }
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         });
