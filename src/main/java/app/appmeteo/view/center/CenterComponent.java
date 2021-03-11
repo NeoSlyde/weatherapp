@@ -16,7 +16,7 @@ public class CenterComponent extends VBox {
     private DateSelectorComponent dateSelectorComponent;
 
     private PartOfTheDayComponent morningComponent = new PartOfTheDayComponent("Matin");
-    private PartOfTheDayComponent afternoonComponent = new PartOfTheDayComponent("Après-Midi");
+    private PartOfTheDayComponent afternoonComponent = new PartOfTheDayComponent("AprÃ¨s-Midi");
 
 
 

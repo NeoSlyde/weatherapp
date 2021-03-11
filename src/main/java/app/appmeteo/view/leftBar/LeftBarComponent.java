@@ -130,7 +130,7 @@ public class LeftBarComponent extends VBox {
                         Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
                         weather.ifPresentOrElse(w -> {
                             appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                        }, () -> System.out.println("M�t�o introuvable"));
+                        }, () -> System.out.println("Méteo introuvable"));
                     }
                     appScene.activate();
                 }

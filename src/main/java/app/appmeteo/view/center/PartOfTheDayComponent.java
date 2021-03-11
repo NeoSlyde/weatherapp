@@ -4,20 +4,25 @@ import app.appmeteo.view.misc.AppLabel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * This represents a single line in the center component e.g "Matin" + "8°C" +
+ * This represents a single line in the center component e.g "Matin" + "8Â°C" +
  * "some icon"
  */
 public class PartOfTheDayComponent extends HBox {
     private Label nameLabel;
-    public Label temperatureLabel = new AppLabel("", "part-of-the-day-temperature");
+    private Label temperatureLabel = new AppLabel("", "part-of-the-day-temperature");
+    // ! PLACEHOLDER
+    private ImageView icon = new ImageView("/owm_icons/custom/02d@4x.png");
+    
     // TODO: Icons
 
     public void setTemperature(int temperature) {
-        temperatureLabel.setText(temperature + "°C");
+        temperatureLabel.setText(temperature + "Â°C");
     }
 
     public PartOfTheDayComponent(String name) {
@@ -32,10 +37,12 @@ public class PartOfTheDayComponent extends HBox {
         vbox.getChildren().add(temperatureLabel);
         vbox.setPadding(new Insets(25, 0, 0, 0));
 
-        // TODO: Add icon here
+        this.getChildren().add(icon);
+        icon.setScaleX(.9); icon.setScaleY(.9);
+        setMargin(icon, new Insets(-30, 0, 0, 0));
+        
 
         nameLabel.setAlignment(Pos.CENTER);
         temperatureLabel.setAlignment(Pos.CENTER);
-        this.setPrefHeight(165);
     }
 }
