@@ -7,7 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 public class ArrowButton extends Button {
-    Action onClick;
+    private boolean clickable = true;
+    public boolean isClickable() { return clickable; }
+    public void setClickable(boolean v) { 
+        this.setOpacity(v ? 1 : .3);
+        clickable = v;
+    }
 
     public ImageView img = new ImageView("valid_mres.png");
 
@@ -24,9 +29,12 @@ public class ArrowButton extends Button {
         this.setScaleX(scale);
         this.setScaleY(scale);
 
-        this.setOnAction((evt) -> { onClick.run(); });
+        this.setOnAction((evt) -> { 
+            if (clickable)
+                onClick.run(); 
+        });
         this.hoverProperty().addListener((o, oldVal, newVal) -> {
-            if (newVal) {
+            if (newVal && clickable) {
                 scene.setCursor(Cursor.HAND);
                 this.setScaleX(scale * 1.2);
                 this.setScaleY(scale * 1.2);

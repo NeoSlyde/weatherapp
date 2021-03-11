@@ -39,10 +39,10 @@ public class DateSelectorComponent extends HBox {
         ArrowButton prevButton = new ArrowButton(scene, () -> {
             wonki--;
             if(wonki == 0){
-                this.getChildren().get(0).setVisible(false);
+                ((ArrowButton)(this.getChildren().get(0))).setClickable(false);
             }
             if(wonki <= 7){
-                this.getChildren().get(2).setVisible(true);
+                ((ArrowButton)(this.getChildren().get(2))).setClickable(true);
             }
             setDate(getDate().get().minusDays(1));
             String selectedCity = appScene.getCity();
@@ -58,7 +58,7 @@ public class DateSelectorComponent extends HBox {
                 Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
                 weather.ifPresentOrElse(w -> {
                     appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                }, () -> System.out.println("Météo introuvable"));
+                }, () -> System.out.println("Mï¿½tï¿½o introuvable"));
             }
 
 
@@ -69,10 +69,10 @@ public class DateSelectorComponent extends HBox {
         ArrowButton nextButton = new ArrowButton(scene, () -> {
             wonki++;
             if(wonki == 7){
-                this.getChildren().get(2).setVisible(false);
+                ((ArrowButton)(this.getChildren().get(2))).setClickable(false);
             }
             if(wonki >= 0){
-                this.getChildren().get(0).setVisible(true);
+                ((ArrowButton)(this.getChildren().get(0))).setClickable(true);
             }
             appScene.activate();
             setDate(getDate().get().plusDays(1));
@@ -88,7 +88,7 @@ public class DateSelectorComponent extends HBox {
                 Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
                 weather.ifPresentOrElse(w -> {
                     appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                }, () -> System.out.println("Météo introuvable"));
+                }, () -> System.out.println("Mï¿½tï¿½o introuvable"));
             }
 
         }, .7);
@@ -98,7 +98,7 @@ public class DateSelectorComponent extends HBox {
         this.getChildren().add(prevButton);
         this.getChildren().add(dayAndDate);
         this.getChildren().add(nextButton);
-        prevButton.setVisible(false);
+        prevButton.setClickable(false);
 
     }
 
