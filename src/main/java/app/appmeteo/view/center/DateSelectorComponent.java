@@ -53,7 +53,7 @@ public class DateSelectorComponent extends HBox {
             if(date.isPresent()){
 
                 //appScene.setDate(date.get());
-                OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
+                OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
                 List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(selectedCity));
                 Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
                 weather.ifPresentOrElse(w -> {
@@ -83,7 +83,7 @@ public class DateSelectorComponent extends HBox {
             Optional<LocalDate> date = appScene.getCenterDate();
             if(date.isPresent()){
                 //appScene.setDate(date.get());
-                OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
+                OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
                 List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(selectedCity));
                 Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
                 weather.ifPresentOrElse(w -> {

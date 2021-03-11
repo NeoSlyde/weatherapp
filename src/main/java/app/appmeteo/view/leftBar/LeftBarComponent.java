@@ -110,12 +110,12 @@ public class LeftBarComponent extends VBox {
                     Optional<LocalDate> date = appScene.getCenterDate();
                     if(date.isPresent()){
                         //appScene.setDate(date.get());
-                        OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
+                        OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
                         List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(selectedCityLabel.getText()));
                         Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
                         weather.ifPresentOrElse(w -> {
                             appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                        }, () -> System.out.println("Météo introuvable"));
+                        }, () -> System.out.println("Mï¿½tï¿½o introuvable"));
                     }
                     appScene.activate();
                 }

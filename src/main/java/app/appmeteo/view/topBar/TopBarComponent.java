@@ -49,7 +49,7 @@ public class TopBarComponent extends HBox{
         
                 Optional<LocalDate> date = appScene.getCenterDate();
                 if(date.isPresent()){
-                    OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
+                    OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
                     List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(cityInput.getText()));
                     Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
                     weather.ifPresentOrElse(w -> {

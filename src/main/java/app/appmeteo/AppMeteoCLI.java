@@ -38,7 +38,7 @@ public class AppMeteoCLI {
          * Program start
          */
 
-        OpenWeatherMapAPI oAPI = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
+        OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
 
         if (date.isPresent()) {
             // i.e if the user specified the date
