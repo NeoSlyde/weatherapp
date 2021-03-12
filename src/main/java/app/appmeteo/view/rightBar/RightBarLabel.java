@@ -55,7 +55,7 @@ public class RightBarLabel extends VBox {
         icon.setScaleX(.5); icon.setScaleY(.5);
         icon.setX(-30); icon.setY(-60);
         pane.getChildren().add(icon);
-        
+        pane.setPrefWidth(0);
     }
 
     public void setTemperature(int temperature) {
