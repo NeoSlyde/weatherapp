@@ -36,7 +36,7 @@ public class FavoriteLabel extends VBox {
             Stage obj = (Stage) this.getScene().getWindow();
             obj.setIconified(true);
         }, 0.5);
-        button.setPadding(new Insets(20,0,19,0));
+        button.setPadding(new Insets(20,20,19,0));
         button.setCursor(Cursor.HAND);
 
         TextInputDialog td = new TextInputDialog("");
@@ -88,6 +88,7 @@ public class FavoriteLabel extends VBox {
         button.setOnAction(handler);
 
         hBox.getChildren().addAll(favoriteLabel,button);
+        hBox.setPadding(new Insets(0, 0, 0, 10));
         this.getChildren().add(hBox);
     }
 
