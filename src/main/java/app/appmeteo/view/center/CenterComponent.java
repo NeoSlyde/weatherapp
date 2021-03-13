@@ -17,7 +17,7 @@ public class CenterComponent extends VBox {
 
     private PartOfTheDayComponent morningComponent = new PartOfTheDayComponent("Matin");
     private PartOfTheDayComponent afternoonComponent = new PartOfTheDayComponent("Après-Midi");
-
+    private HourlyWeatherComponent hourlyWeatherComponent;
 
 
     public PartOfTheDayComponent getMorningComponent() {
@@ -25,6 +25,9 @@ public class CenterComponent extends VBox {
     }
     public PartOfTheDayComponent getAfternoonComponent() {
         return afternoonComponent;
+    }
+    public HourlyWeatherComponent getHourlyWeatherComponent() {
+        return hourlyWeatherComponent;
     }
 
     public void activate(){
@@ -52,6 +55,7 @@ public class CenterComponent extends VBox {
     }
 
     public CenterComponent(Scene scene, AppScene appScene) {
+        hourlyWeatherComponent = new HourlyWeatherComponent(appScene);
         dateSelectorComponent = new DateSelectorComponent(scene, appScene);
         this.getChildren().add(dateSelectorComponent);
 
@@ -70,6 +74,9 @@ public class CenterComponent extends VBox {
 
         partsOfTheDay.getChildren().add(getMorningComponent());
         partsOfTheDay.getChildren().add(getAfternoonComponent());
+
+        setMargin(hourlyWeatherComponent, new Insets(0, 0, 50, 90));
+        this.getChildren().add(hourlyWeatherComponent);
 
         morningComponent.setVisible(false);
         afternoonComponent.setVisible(false);

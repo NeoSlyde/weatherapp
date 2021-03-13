@@ -3,6 +3,7 @@ package app.appmeteo.view;
 import app.appmeteo.controller.OpenWeatherMapAPI;
 import app.appmeteo.model.City;
 import app.appmeteo.model.weather.MultiTempWeather;
+import app.appmeteo.model.weather.Weather;
 import app.appmeteo.view.center.CenterComponent;
 import app.appmeteo.view.rightBar.RightBarComponnent;
 import app.appmeteo.view.topBar.TopBarComponent;
@@ -12,6 +13,8 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,19 +55,24 @@ public class AppScene extends Scene {
             this.centerComponent.getAfternoonComponent().setIcon(w.icon);
         }, () -> System.out.println("Méteo introuvable"));
 
+        List<Weather> hourly = OpenWeatherMapAPI.singleton.fetchHourlyWeather(city);
+        LocalDateTime hourlyDate = LocalDateTime.of(date, LocalTime.now());
+        this.centerComponent.getHourlyWeatherComponent().setWeather(hourly, hourlyDate);
+        this.centerComponent.getHourlyWeatherComponent().update();
+
         // With the above approach we always have the same icon twice
         // So we try to fetch the icons from the hourly OWM API
 
         final int MORNING_HOUR   = 10,
                   AFTERNOON_HOUR = 17;
-
-        OpenWeatherMapAPI.singleton.fetchHourlyWeather(city).stream()
+ 
+        hourly.stream()
             .filter(w -> w.date.getYear()    == date.getYear()
                     && w.date.getDayOfYear() == date.getDayOfYear()
                     && w.date.getHour()      == MORNING_HOUR)
             .findAny().map(w -> w.icon)
             .ifPresent(this.centerComponent.getMorningComponent()::setIcon);
-        OpenWeatherMapAPI.singleton.fetchHourlyWeather(city).stream()
+        hourly.stream()
             .filter(w -> w.date.getYear()    == date.getYear()
                     && w.date.getDayOfYear() == date.getDayOfYear()
                     && w.date.getHour()      == AFTERNOON_HOUR)
