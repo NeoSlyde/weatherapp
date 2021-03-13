@@ -119,6 +119,8 @@ public class LeftBarComponent extends VBox {
             public void handle(MouseEvent mouseEvent) {
                 if (!listView.getItems().isEmpty()) {
                     Label selectedCityLabel = listView.getSelectionModel().getSelectedItem();
+                    listView.getItems().forEach(l -> l.setStyle("-fx-text-fill: #323232"));
+                    selectedCityLabel.setStyle("-fx-text-fill: #2b78bb");
                     if(selectedCityLabel == null){
                         return;
                     }

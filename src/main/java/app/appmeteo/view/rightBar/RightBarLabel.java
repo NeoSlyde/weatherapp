@@ -9,6 +9,7 @@ import app.appmeteo.view.misc.AppLabel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -24,9 +25,12 @@ public class RightBarLabel extends VBox {
 
     private Label cityLabel;
     private Label tempLabel = new AppLabel("","city-label-right-temp");
-    // ! PLACEHOLDER
     private ImageView icon = new ImageView("/owm_icons/custom/02d@4x.png");
 
+    public void setIcon(String iconID) {
+        icon.setImage(new Image("/owm_icons/custom/" + iconID + "@4x.png"));
+    }
+    
     public RightBarLabel(City city){
         this.cityLabel = new AppLabel(city.toString(), "city-label-right");
 
@@ -37,6 +41,7 @@ public class RightBarLabel extends VBox {
         Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, currentDate);
         weather.ifPresentOrElse(w -> {
             setTemperature(w.dayTemperature.toInt());
+            setIcon(w.icon);
         }, () -> System.out.println("Météo introuvable"));
 
         cityLabel.setAlignment(Pos.CENTER);
