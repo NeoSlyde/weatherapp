@@ -83,20 +83,22 @@
     -fx-background-color: transparent;
 }
 
-.addCity{
+.addCityCurrent{
     -fx-font-family: "Quicksand";
-    -fx-font-size: 18;
-    -fx-border-color: grey;
-    -fx-border-width: 2;
-    -fx-border-radius: 25px;
-    -fx-border: gone;
-    -fx-background-radius: 25px;
+    -fx-background-color: transparent;
+    -fx-font-size: 12pt;
     -fx-text-fill: black;
 }
 
-.addCity:focused{
-    -fx-border-color: #67b7ff;
+.addCity{
+    -fx-font-family: "Quicksand";
+    -fx-background-color: #c4c4c4;
+    -fx-text-fill: #373737;
+    -fx-background-radius: 0;
+    -fx-font-size: 24pt;
+    -fx-font-weight: bold;
 }
+
 
 .list-view, .list-cell {
     -fx-background-color: transparent;
@@ -110,3 +112,4 @@
 .greyed-arrow{
     -fx-opacity: 0.3;
 }
+

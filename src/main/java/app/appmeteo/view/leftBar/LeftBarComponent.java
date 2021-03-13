@@ -8,6 +8,7 @@ import app.appmeteo.view.AppScene;
 import app.appmeteo.view.center.CenterComponent;
 import app.appmeteo.view.misc.AppLabel;
 import app.appmeteo.view.rightBar.RightBarComponnent;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.Scene;
@@ -24,24 +25,28 @@ import java.util.List;
 import java.util.Optional;
 
 public class LeftBarComponent extends VBox {
+
+    protected static ListView<Label> listView = new ListView<>();
+    protected static Favorites favorites;
+
+    static {
+        try {
+            favorites = Favorites.readFavoriteFromFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public LeftBarComponent(Scene scene, AppScene appScene) throws IOException {
 
+        //Button
 
-        Favorites favorites = Favorites.readFavoriteFromFile();
-
-        Label leftLabel = new AppLabel("Favoris", "bg-5");
-        leftLabel.setPadding(new Insets(20,20,20,34));
-
-        // TextField
-        TextField textField = new TextField();
-        textField.setPromptText("Ajouter un favori");
-        textField.setMaxWidth(178);
-        VBox.setMargin(textField, new Insets(0, 0, 0, 30));
-
-        textField.getStyleClass().add("addCity");
+        Button buttonAddCity = new Button("Ajouter la ville actuelle");
+        buttonAddCity.setMaxWidth(240);
+        buttonAddCity.getStyleClass().add("addCityCurrent");
+        buttonAddCity.setPadding(new Insets(10,0,0,0));
 
         // ListView
-        ListView<Label> listView = new ListView<>();
         listView.setMaxWidth(240);
         listView.setPrefHeight(430);
 
@@ -52,11 +57,10 @@ public class LeftBarComponent extends VBox {
             RightBarComponnent.addLabel(city);
         }
 
-
-        textField.setOnKeyReleased(keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.ENTER) {
-                if (textField.getText().isEmpty()) return;
-                City city = new City(textField.getText());
+        buttonAddCity.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                City city = new City(appScene.getCity());
                 try {
                     if (!OpenWeatherMapAPI.singleton.fetchCityExists(city.toString())) {
                         Alert alert = new Alert(AlertType.INFORMATION);
@@ -64,7 +68,7 @@ public class LeftBarComponent extends VBox {
                         alert.setHeaderText("Chargement de la meteo");
                         alert.setContentText("La ville `" + city + "` n'existe pas");
                         alert.showAndWait();
-                        
+
                         return;
                     }
                     boolean success = false;
@@ -77,18 +81,16 @@ public class LeftBarComponent extends VBox {
                     }
                     if (favorites.getList().isEmpty() || success) {
                         favorites.add(city);
-                        textField.setText("");
-    
                         Label cityLabel = new AppLabel(city.toString(), "favorites-item-label");
                         listView.getItems().add(cityLabel);
                         cityLabel.setPadding(new Insets(0, 0, 15, 25));
-    
+
                         try {
                             favorites.writeFavorite2File();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-    
+
                         RightBarComponnent.addLabel(city);
                     }
                 } catch (IOException e1) {
@@ -119,6 +121,9 @@ public class LeftBarComponent extends VBox {
             public void handle(MouseEvent mouseEvent) {
                 if (!listView.getItems().isEmpty()) {
                     Label selectedCityLabel = listView.getSelectionModel().getSelectedItem();
+                    if(selectedCityLabel == null){
+                        return;
+                    }
                     appScene.setCenterLabels(new City(selectedCityLabel.getText()));
 
                     //Optional<LocalDate> date = Optional.empty();
@@ -137,7 +142,7 @@ public class LeftBarComponent extends VBox {
             }
         });
 
-        this.getChildren().addAll(leftLabel, listView, textField);
+        this.getChildren().addAll(new FavoriteLabel(appScene), listView,buttonAddCity/*, textField*/);
         this.setSpacing(25);
 
         this.setBackground(
