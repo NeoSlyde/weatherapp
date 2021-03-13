@@ -98,7 +98,7 @@ public class LeftBarComponent extends VBox {
         });
 
         listView.setOnKeyReleased(keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.DELETE) {
+            if (keyEvent.getCode() == KeyCode.DELETE && listView.getItems().size() != 0) {
                 int selectedIndices = listView.getSelectionModel().getSelectedIndex();
                 Label selectedCityLabel = listView.getSelectionModel().getSelectedItem();
                 favorites.get(selectedCityLabel.getText()).ifPresent(c -> favorites.remove(c));
