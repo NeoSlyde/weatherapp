@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.Optional;
 
 
 public class FavoriteLabel extends VBox {
@@ -37,43 +38,43 @@ public class FavoriteLabel extends VBox {
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                td.showAndWait();
-                City city = new City(td.getEditor().getText());
-                try {
-                    if (!OpenWeatherMapAPI.singleton.fetchCityExists(city.toString())) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Erreur");
-                        alert.setHeaderText("Chargement de la meteo");
-                        alert.setContentText("La ville `" + city + "` n'existe pas");
-                        alert.showAndWait();
-
-                        return;
-                    }
-                    boolean success = false;
-                    for (City city1 : LeftBarComponent.favorites.getList()) {
-                        if (city.equals(city1)) {
-                            success = false;
-                            break;
+                td.showAndWait().map(City::new).ifPresent(city -> {
+                    try {
+                        if (!OpenWeatherMapAPI.singleton.fetchCityExists(city.toString())) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Erreur");
+                            alert.setHeaderText("Chargement de la meteo");
+                            alert.setContentText("La ville `" + city + "` n'existe pas");
+                            alert.showAndWait();
+    
+                            return;
                         }
-                        success = true;
-                    }
-                    if (LeftBarComponent.favorites.getList().isEmpty() || success) {
-                        LeftBarComponent.favorites.add(city);
-                        Label cityLabel = new AppLabel(city.toString(), "favorites-item-label");
-                        LeftBarComponent.listView.getItems().add(cityLabel);
-                        cityLabel.setPadding(new Insets(0, 0, 15, 25));
-
-                        try {
-                            LeftBarComponent.favorites.writeFavorite2File();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        boolean success = false;
+                        for (City city1 : LeftBarComponent.favorites.getList()) {
+                            if (city.equals(city1)) {
+                                success = false;
+                                break;
+                            }
+                            success = true;
                         }
-
-                        RightBarComponnent.addLabel(city);
+                        if (LeftBarComponent.favorites.getList().isEmpty() || success) {
+                            LeftBarComponent.favorites.add(city);
+                            Label cityLabel = new AppLabel(city.toString(), "favorites-item-label");
+                            LeftBarComponent.listView.getItems().add(cityLabel);
+                            cityLabel.setPadding(new Insets(0, 0, 15, 25));
+    
+                            try {
+                                LeftBarComponent.favorites.writeFavorite2File();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+    
+                            RightBarComponnent.addLabel(city);
+                        }
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                });
             }
         };
         button.setOnAction(handler);
