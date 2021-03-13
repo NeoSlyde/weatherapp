@@ -51,6 +51,25 @@ public class AppScene extends Scene {
             this.centerComponent.getAfternoonComponent().setTemperature((int) w.dayTemperature.toCelcius());
             this.centerComponent.getAfternoonComponent().setIcon(w.icon);
         }, () -> System.out.println("Méteo introuvable"));
+
+        // With the above approach we always have the same icon twice
+        // So we try to fetch the icons from the hourly OWM API
+
+        final int MORNING_HOUR   = 10,
+                  AFTERNOON_HOUR = 17;
+
+        OpenWeatherMapAPI.singleton.fetchHourlyWeather(city).stream()
+            .filter(w -> w.date.getYear()    == date.getYear()
+                    && w.date.getDayOfYear() == date.getDayOfYear()
+                    && w.date.getHour()      == MORNING_HOUR)
+            .findAny().map(w -> w.icon)
+            .ifPresent(this.centerComponent.getMorningComponent()::setIcon);
+        OpenWeatherMapAPI.singleton.fetchHourlyWeather(city).stream()
+            .filter(w -> w.date.getYear()    == date.getYear()
+                    && w.date.getDayOfYear() == date.getDayOfYear()
+                    && w.date.getHour()      == AFTERNOON_HOUR)
+            .findAny().map(w -> w.icon)
+            .ifPresent(this.centerComponent.getAfternoonComponent()::setIcon);
     }
 
     public Optional<LocalDate> getCenterDate(){
