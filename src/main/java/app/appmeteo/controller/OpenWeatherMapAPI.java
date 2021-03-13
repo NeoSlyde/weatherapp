@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import app.appmeteo.model.City;
 import app.appmeteo.model.weather.CurrentWeather;
 import app.appmeteo.model.weather.MultiTempWeather;
+import app.appmeteo.model.weather.Weather;
 import app.appmeteo.model.weather.WeatherDeserializer;
 
 public class OpenWeatherMapAPI {
@@ -44,6 +45,17 @@ public class OpenWeatherMapAPI {
         }
         return null;
     }
+    // Returns null if fetch failed
+    public List<Weather> fetchHourlyWeather(City city) {
+        try {
+            String json = fetchHourlyWeatherJSON(fetchCoordinates(city));
+            WeatherDeserializer deserializer = new WeatherDeserializer();
+            return deserializer.getHourlyWeather(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public CurrentWeather fetchCurrentWeather(City city) throws IOException {
         String json = fetchURL(new URL("http://api.openweathermap.org/data/2.5/weather?q=" + city.toString() + "&lang=fr&appid=" + apiKey));
@@ -70,6 +82,11 @@ public class OpenWeatherMapAPI {
     private String fetchDailyWeatherJSON(Coordinates coords) throws IOException {
         URL url = new URL("https://api.openweathermap.org/data/2.5/onecall?lat=" + coords.lat + "&lon=" + coords.lon
                 + "&exclude=minutely,hourly&lang=fr&appid=" + apiKey);
+        return fetchURL(url);
+    }
+    private String fetchHourlyWeatherJSON(Coordinates coords) throws IOException {
+        URL url = new URL("https://api.openweathermap.org/data/2.5/onecall?lat=" + coords.lat + "&lon=" + coords.lon
+                + "&exclude=current,minutely,daily,alerts&lang=fr&appid=" + apiKey);
         return fetchURL(url);
     }
 
