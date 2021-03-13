@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -34,27 +35,34 @@ public class OpenWeatherMapAPI {
         }
     }
 
+    private HashMap<City, List<MultiTempWeather>> dailyWeatherCache = new HashMap<>();
     // Returns null if fetch failed
     public List<MultiTempWeather> fetchDailyWeather(City city) {
-        try {
-            String json = fetchDailyWeatherJSON(fetchCoordinates(city));
-            WeatherDeserializer deserializer = new WeatherDeserializer();
-            return deserializer.getDailyWeather(json);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!dailyWeatherCache.containsKey(city)) {
+            try {
+                String json = fetchDailyWeatherJSON(fetchCoordinates(city));
+                WeatherDeserializer deserializer = new WeatherDeserializer();
+                dailyWeatherCache.put(city, deserializer.getDailyWeather(json));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return null;
+        return dailyWeatherCache.get(city);
     }
+
+    private HashMap<City, List<Weather>> hourlyWeatherCache = new HashMap<>();
     // Returns null if fetch failed
     public List<Weather> fetchHourlyWeather(City city) {
-        try {
-            String json = fetchHourlyWeatherJSON(fetchCoordinates(city));
-            WeatherDeserializer deserializer = new WeatherDeserializer();
-            return deserializer.getHourlyWeather(json);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!hourlyWeatherCache.containsKey(city)) {
+            try {
+                String json = fetchHourlyWeatherJSON(fetchCoordinates(city));
+                WeatherDeserializer deserializer = new WeatherDeserializer();
+                hourlyWeatherCache.put(city, deserializer.getHourlyWeather(json));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return null;
+        return hourlyWeatherCache.get(city);
     }
 
     public CurrentWeather fetchCurrentWeather(City city) throws IOException {
