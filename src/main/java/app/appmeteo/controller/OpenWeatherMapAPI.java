@@ -64,6 +64,7 @@ public class OpenWeatherMapAPI {
     }
 
     public boolean fetchCityExists(String city) throws IOException {
+        if (city == null || city.equals("")) return false;
         try {
             URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey);
             fetchURL(url);
