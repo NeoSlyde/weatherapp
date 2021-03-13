@@ -28,7 +28,7 @@ public class PartOfTheDayComponent extends HBox {
     public PartOfTheDayComponent(String name) {
         this.nameLabel = new AppLabel(name, "part-of-the-day-name");
 
-        setTemperature(8); // ! Temporary
+        setTemperature(0);
 
         VBox vbox = new VBox();
         vbox.setPrefWidth(260);
