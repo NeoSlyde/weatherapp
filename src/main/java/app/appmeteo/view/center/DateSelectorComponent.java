@@ -56,9 +56,7 @@ public class DateSelectorComponent extends HBox {
                 OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
                 List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(selectedCity));
                 Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
-                weather.ifPresentOrElse(w -> {
-                    appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                }, () -> System.out.println("Méteo introuvable"));
+                weather.ifPresentOrElse(appScene::setWeather, () -> System.out.println("Méteo introuvable"));
             }
 
 
@@ -86,9 +84,7 @@ public class DateSelectorComponent extends HBox {
                 OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
                 List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(selectedCity));
                 Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
-                weather.ifPresentOrElse(w -> {
-                    appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                }, () -> System.out.println("Méteo introuvable"));
+                weather.ifPresentOrElse(appScene::setWeather, () -> System.out.println("Méteo introuvable"));
             }
 
         }, .7);

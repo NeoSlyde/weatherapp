@@ -35,9 +35,7 @@ public class AppScene extends Scene {
         setCenterLabels(new City("Marseille"));
         List<MultiTempWeather> weatherList = OpenWeatherMapAPI.singleton.fetchDailyWeather(new City("Marseille"));
         Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, LocalDate.now());
-        weather.ifPresentOrElse(w -> {
-            setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-        }, () -> System.out.println("Méteo introuvable"));
+        weather.ifPresentOrElse(this::setWeather, () -> System.out.println("Méteo introuvable"));
 
         activate();
     }
@@ -54,9 +52,9 @@ public class AppScene extends Scene {
         this.centerComponent.setDate(date);
     }
 
-    public void setWeather(int tempmorning, int tempday){
-        this.centerComponent.getMorningComponent().setTemperature(tempmorning);
-        this.centerComponent.getAfternoonComponent().setTemperature(tempday);
+    public void setWeather(MultiTempWeather w){
+        this.centerComponent.getMorningComponent().setTemperature((int) w.morningTemperature.toCelcius());
+        this.centerComponent.getAfternoonComponent().setTemperature((int) w.dayTemperature.toCelcius());
     }
 
     public Optional<LocalDate> getCenterDate(){

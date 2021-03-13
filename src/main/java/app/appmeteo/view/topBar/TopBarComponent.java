@@ -2,17 +2,12 @@ package app.appmeteo.view.topBar;
 
 import app.appmeteo.controller.OpenWeatherMapAPI;
 import app.appmeteo.model.City;
-import app.appmeteo.model.date.DateTools;
 import app.appmeteo.model.weather.MultiTempWeather;
 import app.appmeteo.view.AppScene;
-import app.appmeteo.view.center.CenterComponent;
-import app.appmeteo.view.center.PartOfTheDayComponent;
 import app.appmeteo.view.misc.*;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
-import javafx.scene.Parent;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.Scene;
@@ -86,9 +81,7 @@ public class TopBarComponent extends HBox{
                         OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
                         List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(cityInput.getText()));
                         Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
-                        weather.ifPresentOrElse(w -> {
-                            appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                        }, () -> System.out.println("Méteo introuvable"));
+                        weather.ifPresentOrElse(appScene::setWeather, () -> System.out.println("Méteo introuvable"));
                     }
                     appScene.activate();
                 } catch (IOException e) {

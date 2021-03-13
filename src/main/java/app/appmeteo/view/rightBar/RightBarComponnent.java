@@ -1,17 +1,11 @@
 package app.appmeteo.view.rightBar;
 
 import app.appmeteo.model.City;
-import app.appmeteo.view.misc.AppLabel;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public class RightBarComponnent extends HBox {
 

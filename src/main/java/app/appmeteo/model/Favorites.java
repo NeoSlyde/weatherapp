@@ -1,10 +1,5 @@
 package app.appmeteo.model;
 
-import app.appmeteo.view.misc.AppLabel;
-import app.appmeteo.view.rightBar.RightBarComponnent;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

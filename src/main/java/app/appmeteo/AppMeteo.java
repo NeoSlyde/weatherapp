@@ -1,6 +1,5 @@
 package app.appmeteo;
 
-import app.appmeteo.controller.OpenWeatherMapAPI;
 import app.appmeteo.view.AppScene;
 import javafx.application.Application;
 import javafx.scene.Scene;

@@ -2,10 +2,8 @@ package app.appmeteo.view.leftBar;
 
 import app.appmeteo.controller.OpenWeatherMapAPI;
 import app.appmeteo.model.*;
-import app.appmeteo.model.date.DateTools;
 import app.appmeteo.model.weather.MultiTempWeather;
 import app.appmeteo.view.AppScene;
-import app.appmeteo.view.center.CenterComponent;
 import app.appmeteo.view.misc.AppLabel;
 import app.appmeteo.view.rightBar.RightBarComponnent;
 import javafx.event.ActionEvent;
@@ -135,9 +133,7 @@ public class LeftBarComponent extends VBox {
                         OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
                         List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(selectedCityLabel.getText()));
                         Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
-                        weather.ifPresentOrElse(w -> {
-                            appScene.setWeather(w.morningTemperature.toInt(), w.dayTemperature.toInt());
-                        }, () -> System.out.println("Méteo introuvable"));
+                        weather.ifPresentOrElse(appScene::setWeather, () -> System.out.println("Méteo introuvable"));
                     }
                     appScene.activate();
                 }

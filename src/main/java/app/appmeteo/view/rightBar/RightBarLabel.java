@@ -5,14 +5,11 @@ import app.appmeteo.controller.OpenWeatherMapAPI;
 import app.appmeteo.model.City;
 import app.appmeteo.model.weather.MultiTempWeather;
 
-import app.appmeteo.model.City;
-
 import app.appmeteo.view.misc.AppLabel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
