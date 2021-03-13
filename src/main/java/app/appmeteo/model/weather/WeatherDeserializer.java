@@ -67,4 +67,29 @@ public class WeatherDeserializer {
         }
         return weatherList;
     }
+
+    public List<Weather> getHourlyWeather(String json) {
+        List<Weather> weatherList = new ArrayList<>();
+
+        JSONArray weatherJsonArray = new JSONObject(json).getJSONArray("hourly");
+        for (Object weatherJsonO : weatherJsonArray) {
+            if (!(weatherJsonO instanceof JSONObject))
+                continue;
+            JSONObject weatherJson = (JSONObject) weatherJsonO;
+
+            LocalDate date = Instant.ofEpochMilli(1000l * weatherJson.getLong("dt"))
+                             .atZone(ZoneId.systemDefault()).toLocalDate();
+            JSONObject jsonObj = weatherJson.getJSONArray("weather").getJSONObject(0);
+
+            int id = jsonObj.getInt("id");
+            String sky = jsonObj.getString("main");
+            String description = jsonObj.getString("description");
+            String icon = jsonObj.getString("icon");
+
+            weatherList.add(new Weather(
+                date, id, sky, description, icon
+            ));
+        }
+        return weatherList;
+    }
 }
