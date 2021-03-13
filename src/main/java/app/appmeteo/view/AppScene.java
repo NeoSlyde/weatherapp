@@ -54,7 +54,9 @@ public class AppScene extends Scene {
 
     public void setWeather(MultiTempWeather w){
         this.centerComponent.getMorningComponent().setTemperature((int) w.morningTemperature.toCelcius());
+        this.centerComponent.getMorningComponent().setIcon(w.icon);
         this.centerComponent.getAfternoonComponent().setTemperature((int) w.dayTemperature.toCelcius());
+        this.centerComponent.getAfternoonComponent().setIcon(w.icon);
     }
 
     public Optional<LocalDate> getCenterDate(){

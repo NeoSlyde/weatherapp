@@ -4,6 +4,7 @@ import app.appmeteo.view.misc.AppLabel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,13 +16,15 @@ import javafx.scene.layout.VBox;
 public class PartOfTheDayComponent extends HBox {
     private Label nameLabel;
     private Label temperatureLabel = new AppLabel("", "part-of-the-day-temperature");
-    // ! PLACEHOLDER
     private ImageView icon = new ImageView("/owm_icons/custom/02d@4x.png");
     
     // TODO: Icons
 
     public void setTemperature(int temperature) {
         temperatureLabel.setText(temperature + "°C");
+    }
+    public void setIcon(String iconID) {
+        icon.setImage(new Image("/owm_icons/custom/" + iconID + "@4x.png"));
     }
 
     public PartOfTheDayComponent(String name) {
