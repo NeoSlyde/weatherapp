@@ -3,31 +3,40 @@ package app.appmeteo.view.leftBar;
 import app.appmeteo.controller.OpenWeatherMapAPI;
 import app.appmeteo.model.City;
 import app.appmeteo.view.AppScene;
+import app.appmeteo.view.misc.AddButtonCity;
 import app.appmeteo.view.misc.AppLabel;
 import app.appmeteo.view.rightBar.RightBarComponnent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 
 public class FavoriteLabel extends VBox {
-    public FavoriteLabel(AppScene appScene){
+    public FavoriteLabel(Scene scene){
         HBox hBox = new HBox();
-        Label favoriteLabel = new AppLabel("Favoris","bg-5");
-        favoriteLabel.setPadding(new Insets(20,35,20,28));
+        hBox.setBackground(new Background(new BackgroundFill(Color.web("#c4c4c4"),
+                CornerRadii.EMPTY,
+                Insets.EMPTY)));
 
-        Button button = new Button("+");
-        button.getStyleClass().add("addCity");
-        button.setPadding(new Insets(20,25,19,25));
+        Label favoriteLabel = new AppLabel("Favoris","bg-5");
+        favoriteLabel.setPadding(new Insets(20,35,20,25));
+
+        Button button = new AddButtonCity(scene, ()->{
+            Stage obj = (Stage) this.getScene().getWindow();
+            obj.setIconified(true);
+        }, 0.5);
+        button.setPadding(new Insets(20,0,19,0));
         button.setCursor(Cursor.HAND);
 
         TextInputDialog td = new TextInputDialog("");
