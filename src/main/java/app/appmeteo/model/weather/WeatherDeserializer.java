@@ -1,7 +1,7 @@
 package app.appmeteo.model.weather;
 
 import java.time.Instant;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ public class WeatherDeserializer {
         JSONObject jsonWeather = jsonRoot.getJSONArray("weather").getJSONObject(0);
         JSONObject jsonMain = jsonRoot.getJSONObject("main");
         
-        LocalDate date = Instant.ofEpochMilli(1000l * jsonRoot.getLong("dt"))
-                         .atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDateTime date = Instant.ofEpochMilli(1000l * jsonRoot.getLong("dt"))
+                             .atZone(ZoneId.systemDefault()).toLocalDateTime();
 
         int id = jsonWeather.getInt("id");
         String sky = jsonWeather.getString("main");
@@ -40,8 +40,8 @@ public class WeatherDeserializer {
 
             // Create Weather object
 
-            LocalDate date = Instant.ofEpochMilli(1000l * weatherJson.getLong("dt"))
-                             .atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDateTime date = Instant.ofEpochMilli(1000l * weatherJson.getLong("dt"))
+                                .atZone(ZoneId.systemDefault()).toLocalDateTime();
             JSONObject jsonWeatherArray1 = weatherJson.getJSONArray("weather").getJSONObject(0);
             int id = jsonWeatherArray1.getInt("id");
             String sky = jsonWeatherArray1.getString("main");
@@ -77,8 +77,8 @@ public class WeatherDeserializer {
                 continue;
             JSONObject weatherJson = (JSONObject) weatherJsonO;
 
-            LocalDate date = Instant.ofEpochMilli(1000l * weatherJson.getLong("dt"))
-                             .atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDateTime date = Instant.ofEpochMilli(1000l * weatherJson.getLong("dt"))
+                                 .atZone(ZoneId.systemDefault()).toLocalDateTime();
             JSONObject jsonObj = weatherJson.getJSONArray("weather").getJSONObject(0);
 
             int id = jsonObj.getInt("id");
