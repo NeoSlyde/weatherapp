@@ -11,6 +11,7 @@ import app.appmeteo.view.rightBar.RightBarComponnent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -41,10 +42,11 @@ public class LeftBarComponent extends VBox {
 
         //Button
 
-        Button buttonAddCity = new Button("Ajouter la ville actuelle");
-        buttonAddCity.setMaxWidth(240);
-        buttonAddCity.getStyleClass().add("addCityCurrent");
-        buttonAddCity.setPadding(new Insets(10,0,0,0));
+        Button buttonAddCurrentCity = new Button("Ajouter la ville actuelle");
+        buttonAddCurrentCity.setCursor(Cursor.HAND);
+        buttonAddCurrentCity.setMaxWidth(240);
+        buttonAddCurrentCity.getStyleClass().add("addCityCurrent");
+        buttonAddCurrentCity.setPadding(new Insets(10,0,0,0));
 
         // ListView
         listView.setMaxWidth(240);
@@ -57,7 +59,7 @@ public class LeftBarComponent extends VBox {
             RightBarComponnent.addLabel(city);
         }
 
-        buttonAddCity.setOnAction(new EventHandler<ActionEvent>() {
+        buttonAddCurrentCity.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 City city = new City(appScene.getCity());
@@ -142,7 +144,7 @@ public class LeftBarComponent extends VBox {
             }
         });
 
-        this.getChildren().addAll(new FavoriteLabel(appScene), listView,buttonAddCity/*, textField*/);
+        this.getChildren().addAll(new FavoriteLabel(appScene), listView,buttonAddCurrentCity/*, textField*/);
         this.setSpacing(25);
 
         this.setBackground(

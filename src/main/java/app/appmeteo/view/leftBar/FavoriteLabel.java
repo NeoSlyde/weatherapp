@@ -8,6 +8,7 @@ import app.appmeteo.view.rightBar.RightBarComponnent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,12 +28,13 @@ public class FavoriteLabel extends VBox {
         Button button = new Button("+");
         button.getStyleClass().add("addCity");
         button.setPadding(new Insets(20,25,19,25));
+        button.setCursor(Cursor.HAND);
 
         TextInputDialog td = new TextInputDialog("");
         td.setHeaderText("Enter a city");
 
 
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+        EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 td.showAndWait();
@@ -74,7 +76,7 @@ public class FavoriteLabel extends VBox {
                 }
             }
         };
-        button.setOnAction(event);
+        button.setOnAction(handler);
 
         hBox.getChildren().addAll(favoriteLabel,button);
         this.getChildren().add(hBox);
