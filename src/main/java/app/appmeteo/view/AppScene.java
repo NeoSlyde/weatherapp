@@ -31,32 +31,26 @@ public class AppScene extends Scene {
         layout.setRight(rightBarComponent);
 
         // Default values
-        setDate(LocalDate.now());
-        setCenterLabels(new City("Marseille"));
-        List<MultiTempWeather> weatherList = OpenWeatherMapAPI.singleton.fetchDailyWeather(new City("Marseille"));
-        Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, LocalDate.now());
-        weather.ifPresentOrElse(this::setWeather, () -> System.out.println("Méteo introuvable"));
-
+        setWeather(new City("Marseille"), LocalDate.now());
         activate();
-    }
-
-    public void setCenterLabels(City city){
-        this.centerComponent.setCity(city);
     }
 
     public String getCity(){
         return this.centerComponent.getCity();
     }
 
-    public void setDate(LocalDate date){
-        this.centerComponent.setDate(date);
-    }
+    public void setWeather(City city, LocalDate date){
+        List<MultiTempWeather> weatherList = OpenWeatherMapAPI.singleton.fetchDailyWeather(city);
+        Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date);
+        weather.ifPresentOrElse(w -> {
+            this.centerComponent.setDate(date);
+            this.centerComponent.setCity(city);
 
-    public void setWeather(MultiTempWeather w){
-        this.centerComponent.getMorningComponent().setTemperature((int) w.morningTemperature.toCelcius());
-        this.centerComponent.getMorningComponent().setIcon(w.icon);
-        this.centerComponent.getAfternoonComponent().setTemperature((int) w.dayTemperature.toCelcius());
-        this.centerComponent.getAfternoonComponent().setIcon(w.icon);
+            this.centerComponent.getMorningComponent().setTemperature((int) w.morningTemperature.toCelcius());
+            this.centerComponent.getMorningComponent().setIcon(w.icon);
+            this.centerComponent.getAfternoonComponent().setTemperature((int) w.dayTemperature.toCelcius());
+            this.centerComponent.getAfternoonComponent().setIcon(w.icon);
+        }, () -> System.out.println("Méteo introuvable"));
     }
 
     public Optional<LocalDate> getCenterDate(){

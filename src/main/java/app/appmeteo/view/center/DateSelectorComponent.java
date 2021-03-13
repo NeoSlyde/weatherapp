@@ -2,13 +2,10 @@ package app.appmeteo.view.center;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Optional;
 
-import app.appmeteo.controller.OpenWeatherMapAPI;
 import app.appmeteo.model.City;
 import app.appmeteo.model.date.DateTools;
-import app.appmeteo.model.weather.MultiTempWeather;
 import app.appmeteo.view.AppScene;
 import app.appmeteo.view.misc.*;
 import javafx.geometry.Insets;
@@ -46,17 +43,11 @@ public class DateSelectorComponent extends HBox {
             }
             setDate(getDate().get().minusDays(1));
             String selectedCity = appScene.getCity();
-            appScene.setCenterLabels(new City(selectedCity));
 
-            //Optional<LocalDate> date = Optional.empty();
             Optional<LocalDate> date = appScene.getCenterDate();
             if(date.isPresent()){
-
-                //appScene.setDate(date.get());
-                OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
-                List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(selectedCity));
-                Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
-                weather.ifPresentOrElse(appScene::setWeather, () -> System.out.println("Méteo introuvable"));
+                date.ifPresent(d -> appScene.setWeather(new City(selectedCity), d));
+                appScene.activate();
             }
 
 
@@ -75,17 +66,12 @@ public class DateSelectorComponent extends HBox {
             appScene.activate();
             setDate(getDate().get().plusDays(1));
             String selectedCity = appScene.getCity();
-            appScene.setCenterLabels(new City(selectedCity));
 
             //Optional<LocalDate> date = Optional.empty();
             Optional<LocalDate> date = appScene.getCenterDate();
-            if(date.isPresent()){
-                //appScene.setDate(date.get());
-                OpenWeatherMapAPI oAPI = OpenWeatherMapAPI.singleton;
-                List<MultiTempWeather> weatherList = oAPI.fetchDailyWeather(new City(selectedCity));
-                Optional<MultiTempWeather> weather = MultiTempWeather.getWeather(weatherList, date.get());
-                weather.ifPresentOrElse(appScene::setWeather, () -> System.out.println("Méteo introuvable"));
-            }
+            date.ifPresent(d -> {
+                appScene.setWeather(new City(selectedCity), d);
+            });
 
         }, .7);
         nextButton.img.setEffect(adjust);
