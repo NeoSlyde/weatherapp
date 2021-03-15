@@ -40,7 +40,7 @@ public class FavoriteLabel extends VBox {
         button.setCursor(Cursor.HAND);
 
         TextInputDialog td = new TextInputDialog("");
-        td.setHeaderText("Enter a city");
+        td.setHeaderText("Entrez une ville");
 
 
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
