@@ -17,7 +17,7 @@ import app.appmeteo.model.weather.WeatherDeserializer;
 
 public class OpenWeatherMapAPI {
     public static final OpenWeatherMapAPI singleton 
-        = new OpenWeatherMapAPI("0d2e378a4ce98b9fc40278ffe56e1b76");
+        = new OpenWeatherMapAPI("API_KEY");
     private String apiKey;
 
     public OpenWeatherMapAPI(String apiKey) {
